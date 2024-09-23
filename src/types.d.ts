@@ -1,6 +1,8 @@
 export interface State extends MapType {
-  newLocation: () => void;
+  draggable: boolean;
+  newLocation: (lat: number, lng: numner) => void;
   reset: () => void;
+  setDraggable: () => void;
 }
 
 export interface MapType {
