@@ -2,16 +2,20 @@ import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-ma
 import { MAP_CONFIGURATION } from '../const/const';
 import { MapType } from '../types';
 import { useLocationStore } from '../stores/location';
+import { usePetsStore } from '../stores/pets';
+import { RenderMarkers } from './Markers';
 
 export function Map({ location }: MapType) {
   const GOOGLE_MAPS_APIKEY = import.meta.env.VITE_GOOGLE_MAPS_APIKEY;
   const draggable = useLocationStore(state => state.draggable);
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);
+  const pets = usePetsStore(state => state.pets);
 
+  console.log(pets);
   const handleDragStart = () => {
     // defaultCenter prop enable the posibility to drag the map but unable the posibility of change the location programatically
-    // so we enable it when map is dragg
+    // so we enable it while map is dragring
     setDraggable();
   };
 
@@ -34,8 +38,11 @@ export function Map({ location }: MapType) {
         defaultCenter={draggable ? location : undefined}
         onDragstart={handleDragStart}
         onDragend={(map) => handleDragEnd(map)}
+        onClick={(map) => console.log(map)}
       >
+        <RenderMarkers pets={pets}></RenderMarkers>
       </GoogleMap>
     </APIProvider>
   );
-}; 
+};
+
