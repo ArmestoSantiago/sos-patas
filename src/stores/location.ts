@@ -1,12 +1,12 @@
 import { create } from 'zustand';
-import { MapType, State } from '../types.d';
+import { LocationState, MapType } from '../types.d';
 import { getLocation } from '../services/getLocation';
 
 const initialState: MapType = {
   location: await getLocation().then((location) => location),
 };
 
-export const useLocationStore = create<State>((set, get) => {
+export const useLocationStore = create<LocationState>((set, get) => {
   return {
     ...initialState,
     draggable: false,
