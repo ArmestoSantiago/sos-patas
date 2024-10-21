@@ -27,13 +27,20 @@ export interface PetsInformation {
   imgSrc?: string;
 }
 
-enum PetsType {
+export enum PetsType {
   Dog = 'dog',
   Cat = 'cat'
 }
 
-enum PetsCondition {
-  Healty = 'Healty',
-  Wounded = 'Wounded',
-  Critical = 'Critical'
+export enum PetsCondition {
+  Healty = 'healty',
+  Wounded = 'wounded',
+  Critical = 'critical'
+}
+
+interface FormInformation {
+  especie: PetsType;
+  condition: PetsCondition;
+  description: string;
+
 }
