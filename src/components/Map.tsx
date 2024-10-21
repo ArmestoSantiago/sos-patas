@@ -12,7 +12,10 @@ export function Map({ location }: MapType) {
   const newLocation = useLocationStore(state => state.newLocation);
   const pets = usePetsStore(state => state.pets);
 
-  console.log(pets);
+  const handleClick = (map: MapEvent) => {
+    console.log(map);
+  };
+
   const handleDragStart = () => {
     // defaultCenter prop enable the posibility to drag the map but unable the posibility of change the location programatically
     // so we enable it while map is dragring
@@ -38,7 +41,7 @@ export function Map({ location }: MapType) {
         defaultCenter={draggable ? location : undefined}
         onDragstart={handleDragStart}
         onDragend={(map) => handleDragEnd(map)}
-        onClick={(map) => console.log(map)}
+        onClick={(map) => handleClick(map)}
       >
         <RenderMarkers pets={pets}></RenderMarkers>
       </GoogleMap>
