@@ -1,12 +1,9 @@
+//                                           Location Types
 export interface LocationState extends MapType {
   draggable: boolean;
   newLocation: (lat: number, lng: numner) => void;
   reset: () => void;
   setDraggable: () => void;
-}
-
-export interface PetsState {
-  pets: PetsInformation[];
 }
 
 export interface MapType {
@@ -18,10 +15,16 @@ export interface Location {
   lng: number;
 }
 
+//                                             Pet Types
+export interface PetsState {
+  pets: PetsInformation[];
+}
+
 export interface PetsInformation {
   id: string;
   type: PetsType;
-  location: Location;
+  lat: number;
+  lng: number;
   condition: PetsCondition;
   description: string;
   imgSrc?: string;
@@ -42,5 +45,4 @@ interface FormInformation {
   especie: PetsType;
   condition: PetsCondition;
   description: string;
-
 }
