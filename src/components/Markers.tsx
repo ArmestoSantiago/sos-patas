@@ -10,10 +10,16 @@ export function RenderMarkers({ pets }: PetsState) {
   return (
     <>
       {pets.map(pet => {
+
+        const petLocation = {
+          lat: pet.lat,
+          lng: pet.lng
+        }
+
         return (
-          <AdvancedMarker
+          <AdvancedMarker style={{scale: '150%'}}
             key={pet.id}
-            position={pet.location}>
+            position={petLocation}>
             <Marker></Marker>
           </AdvancedMarker>
         );
