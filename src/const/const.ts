@@ -6,5 +6,6 @@ export const MAP_CONFIGURATION = {
   mapId: import.meta.env.VITE_GOOGLE_MAP_ID,
   defaultZoom: 15,
   disableDefaultUI: true,
+  fullscreenOption: false,
   daggable: true
 };
