@@ -1,8 +1,8 @@
 import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
-import { MAP_CONFIGURATION } from '../const/const';
-import { MapType } from '../types';
-import { useLocationStore } from '../stores/location';
-import { usePetsStore } from '../stores/pets';
+import { MAP_CONFIGURATION } from '../../const/const';
+import { MapType } from '../../types';
+import { useLocationStore } from '../../stores/location';
+import { usePetsStore } from '../../stores/pets';
 import { RenderMarkers } from './Markers';
 
 export function Map({ location }: MapType) {
@@ -13,7 +13,7 @@ export function Map({ location }: MapType) {
   const pets = usePetsStore(state => state.pets);
 
   const handleClick = (map: MapEvent) => {
-    console.log(map);
+    console.log(map?.detail);
   };
 
   const handleDragStart = () => {
