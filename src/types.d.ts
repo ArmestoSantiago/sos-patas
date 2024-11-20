@@ -2,7 +2,7 @@
 export interface LocationState extends MapType {
   draggable: boolean;
   newLocation: (lat: number, lng: numner) => void;
-  reset: () => void;
+  resetLocation: () => void;
   setDraggable: () => void;
 }
 
@@ -31,14 +31,14 @@ export interface PetsInformation {
 }
 
 export enum PetsType {
-  Dog = 'dog',
-  Cat = 'cat'
+  DOG = 'DOG',
+  CAT = 'CAT'
 }
 
 export enum PetsCondition {
-  Healty = 'healty',
-  Wounded = 'wounded',
-  Critical = 'critical'
+  HEALTHY = 'HEALTHY',
+  WOUNDED = 'WOUNDED',
+  CRTICIAL = 'CRTICIAL'
 }
 
 interface FormInformation {

@@ -16,6 +16,6 @@ export const useLocationStore = create<LocationState>((set, get) => {
       if (isDraggable) set({ draggable: false });
       if (!isDraggable) set({ draggable: true });
     },
-    reset: () => set(initialState)
+    resetLocation: () => set(initialState)
   };
 });
