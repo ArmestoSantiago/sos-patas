@@ -1,22 +1,21 @@
 import { useLocationStore } from './stores/location';
 import { signIn, signOutFn } from './services/login';
-import { Map } from './components/Map';
+import { Map } from './components/Map/Map';
+import { MenuPanel } from './components/MenuPanel/MenuPanel';
+import './App.css';
 
 function App() {
   const location = useLocationStore(state => state.location);
-  const reset = useLocationStore(state => state.reset);
 
   const handleLogIn = async () => {
     const userInfo = await signIn();
-  }
-  
+  };
+
   return (
-    <>
-      <button style={{marginRight: 15}}onClick={handleLogIn}>Log IN</button>
-      <button style={{marginRight: 15}}onClick={signOutFn}>Log OUT</button>
-      <button onClick={() => reset()}>reset</button>
-      <Map location={location}></Map> 
-    </>
+    <main className='main-page'>
+      <Map location={location}></Map>
+      <MenuPanel />
+    </main>
   );
 }
 
