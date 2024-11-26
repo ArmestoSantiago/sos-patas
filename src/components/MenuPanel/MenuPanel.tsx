@@ -3,32 +3,7 @@ import { CatIcon, DogIcon, AddIcon, ResetLocationIcon } from '../../icons/PageIc
 import { useLocationStore } from '../../stores/location';
 import { usePetsStore } from '../../stores/pets';
 import './MenuPanel.css';
-
-export function ListContainer({ petsList }) {
-
-  return (
-    <main className='list-container'>
-      {petsList.map(pet => {
-        const petTypeText = pet.type === 'DOG' ? 'Perro' : 'Gato';
-
-        const petConditionText = pet.condition === 'HEALTHY' ? 'Sano' : pet.condition === 'WOUNDED' ? 'Herido' : 'Critico';
-
-        return (
-          <article className='pet-article' key={pet.id}>
-            <div className='pet-container'>
-              <img className='pet-thumbnail' src="./perro.jpg" alt="Pet Photo" />
-              <div>
-                <p>{petTypeText}</p>
-                <p>{petConditionText}</p>
-                <p>{pet.description}</p>
-              </div>
-            </div>
-          </article>
-        );
-      })}
-    </main>
-  );
-}
+import { ListContainer } from './ListContainer';
 
 export function MenuPanel() {
   const resetLocation = useLocationStore(state => state.resetLocation);
@@ -66,7 +41,7 @@ export function MenuPanel() {
           <button className='clear-input'>X</button>
         </div>
         <div className='filter-container'>
-          <button className='filter-button'><DogIcon /></button>
+          <button onClick={handleFilter} className='filter-button'><DogIcon /></button>
           <button className='filter-button'><CatIcon /></button>
         </div>
         <p className='text'>Resultados</p>
