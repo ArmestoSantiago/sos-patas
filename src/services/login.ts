@@ -18,19 +18,20 @@ const auth = getAuth();
 export const signOutFn = () => {
   return signOut(auth).then(() => {
     // Sign-out successful.
-    console.log('Saliste')
+    console.log('Saliste');
+
   }).catch((error) => {
     // An error happened.
-    console.log('De acá no sale nadie' )
+    console.log('De acá no sale nadie');
   });
 }
 
 export const signIn = async () => {
   return signInWithPopup(auth, provider)
     .then((result) => {
-    
+
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      const token = credential?.accessToken;
 
       return result.user;
     }).catch((error) => {
