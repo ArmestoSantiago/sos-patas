@@ -1,47 +1,26 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { CatIcon, DogIcon, AddIcon, ResetLocationIcon } from '../../icons/PageIcons';
 import { useLocationStore } from '../../stores/location';
 import { usePetsStore } from '../../stores/pets';
 import './MenuPanel.css';
-
-export function ListContainer({ petsList }) {
-
-  return (
-    <main className='list-container'>
-      {petsList.map(pet => {
-        const petTypeText = pet.type === 'DOG' ? 'Perro' : 'Gato';
-
-        const petConditionText = pet.condition === 'HEALTHY' ? 'Sano' : pet.condition === 'WOUNDED' ? 'Herido' : 'Critico';
-
-        return (
-          <article className='pet-article' key={pet.id}>
-            <div className='pet-container'>
-              <img className='pet-thumbnail' src="./perro.jpg" alt="Pet Photo" />
-              <div>
-                <p>{petTypeText}</p>
-                <p>{petConditionText}</p>
-                <p>{pet.description}</p>
-              </div>
-            </div>
-          </article>
-        );
-      })}
-    </main>
-  );
-}
+import { PetsType } from '../../types.d';
+import { ListContainer } from './ListContainer';
 
 export function MenuPanel() {
   const resetLocation = useLocationStore(state => state.resetLocation);
-  const [filter, setFilter] = useState(false);
+  const [filter, setFilter] = useState<false | PetsType>(false);
   const pets = usePetsStore(state => state.pets);
 
-  const handleFilter = (type) => {
-    if (!filter) {
-      setFilter(type);
-    }
+  const handleFilter = (type: PetsType) => {
+    if (filter === type) return setFilter(false);
+    setFilter(type);
   };
 
-  const petsList = pets;
+  const filteredPets = useMemo(() => {
+    return filter
+      ? pets.filter(pet => pet.type === filter)
+      : pets;
+  }, [pets, filter]);
 
   const handleTranslate = () => {
     const menu = document.querySelector('.menu-container');
@@ -63,14 +42,14 @@ export function MenuPanel() {
         <div className='input-container'>
           <input className='location-input' placeholder='Buenos Aires, Cordoba...'>
           </input>
-          <button className='clear-input'>X</button>
+          <button className='clear-input'>✖</button>
         </div>
         <div className='filter-container'>
-          <button className='filter-button'><DogIcon /></button>
-          <button className='filter-button'><CatIcon /></button>
+          <button className='filter-button' onClick={() => { handleFilter(PetsType.DOG); }}><DogIcon /></button>
+          <button className='filter-button' onClick={() => { handleFilter(PetsType.CAT); }}><CatIcon /></button>
         </div>
         <p className='text'>Resultados</p>
-        <ListContainer petsList={petsList} />
+        <ListContainer pets={filteredPets} />
       </section>
     </>
   );
