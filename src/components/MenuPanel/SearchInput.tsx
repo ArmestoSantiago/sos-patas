@@ -1,4 +1,4 @@
-import { AutoComplete } from 'antd';
+
 import { useState } from 'react';
 
 export function InputField() {
@@ -9,12 +9,6 @@ export function InputField() {
     setValue(data);
   };
   return (
-    <AutoComplete
-      value={value}
-      className='location-input'
-      placeholder="Buenos Aires, Cordoba"
-      onChange={handleChange}
-    >
-    </AutoComplete>
+    <p>asd</p>
   );
 };;
