@@ -12,10 +12,11 @@
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.5.1",
     "@vis.gl/react-google-maps": "latest",
-    "antd": "^5.21.1",
+    "antd": "^5.22.4",
     "firebase": "^10.14.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "use-places-autocomplete": "4.0.1",
     "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {
