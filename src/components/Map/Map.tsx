@@ -4,6 +4,7 @@ import { MapType } from '../../types';
 import { useLocationStore } from '../../stores/location';
 import { usePetsStore } from '../../stores/pets';
 import { RenderMarkers } from './Markers';
+import { useState } from 'react';
 
 export function Map({ location }: MapType) {
   const GOOGLE_MAPS_APIKEY = import.meta.env.VITE_GOOGLE_MAPS_APIKEY;
@@ -11,6 +12,9 @@ export function Map({ location }: MapType) {
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);
   const pets = usePetsStore(state => state.pets);
+  const [loaded, setLoaded] = useState<boolean>(false);
+
+  console.log(loaded);
 
   const handleClick = (map: MapEvent) => {
     console.log(map?.detail);
@@ -34,7 +38,7 @@ export function Map({ location }: MapType) {
   };
 
   return (
-    <APIProvider apiKey={GOOGLE_MAPS_APIKEY} onLoad={() => console.log('Loaded')}>
+    <APIProvider apiKey={GOOGLE_MAPS_APIKEY} libraries={['places']} onLoad={() => setLoaded(true)}>
       <GoogleMap
         {...MAP_CONFIGURATION}
         center={draggable ? undefined : location}

@@ -1,5 +1,6 @@
-export function getLocationPrediction(input: string) {
-  const GOOGLE_MAPS_APIKEY = import.meta.env.VITE_GOOGLE_MAPS_APIKEY;
-  fetch(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=geocode&key=${GOOGLE_MAPS_APIKEY}`)
-    .then(res => console.log(res));
+export async function getLocationPrediction(input: string) {
+  const API_URL = import.meta.env.VITE_APISOSPATAS_URL;
+  return await fetch(`${API_URL}/predictions?input=${input}`)
+    .then(res => res.json())
+    .then(data => data);
 }

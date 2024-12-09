@@ -1,5 +1,5 @@
 import { useLocationStore } from './stores/location';
-import { signIn, signOutFn } from './services/login';
+import { signIn } from './services/login';
 import { Map } from './components/Map/Map';
 import { MenuPanel } from './components/MenuPanel/MenuPanel';
 import './App.css';

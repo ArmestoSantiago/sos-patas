@@ -5,9 +5,13 @@ import { usePetsStore } from '../../stores/pets';
 import './MenuPanel.css';
 import { PetsType } from '../../types.d';
 import { ListContainer } from './ListContainer';
+import { getLocationPrediction } from '../../services/getLocationPrediction';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import { InputField } from './SearchInput';
 
 export function MenuPanel() {
   const resetLocation = useLocationStore(state => state.resetLocation);
+  const [translate, setTranslate] = useState<boolean>(true);
   const [filter, setFilter] = useState<false | PetsType>(false);
   const pets = usePetsStore(state => state.pets);
 
@@ -23,34 +27,43 @@ export function MenuPanel() {
   }, [pets, filter]);
 
   const handleTranslate = () => {
-    const menu = document.querySelector('.menu-container');
-    const buttonsAddRelocateContainer = document.querySelector('.buttons_add_relocate-container');
-    menu?.classList.toggle('menu-container-translate');
-    buttonsAddRelocateContainer?.classList.toggle('buttons_add_relocate-container-translate');
+    setTranslate(!translate);
+  };
+
+  const handleSearch = (input: string) => {
+    getLocationPrediction(input);
   };
 
   return (
     <>
-      <div className='buttons_add_relocate-container buttons_add_relocate-container-translate'>
-        <button onClick={resetLocation} className='btn btn-relocate'><ResetLocationIcon /></button>
+      <div className={`buttons_add_relocate-container ${translate && 'buttons_add_relocate-container-translate'}`}>
+        <button
+          onClick={resetLocation}
+          className='btn btn-relocate'>
+          <ResetLocationIcon />
+        </button>
         <button className='btn btn-add'><AddIcon /></button>
       </div>
-      <section className='menu-container menu-container-translate'>
+      <section className={`menu-container ${translate && 'menu-container-translate'}`}>
         <button onClick={handleTranslate} className='menu-toggler'>
           <div className='line-button'></div>
         </button>
-        <div className='input-container'>
-          <input className='location-input' placeholder='Buenos Aires, Cordoba...'>
-          </input>
-          <button className='clear-input'>✖</button>
-        </div>
+        <InputField />
         <div className='filter-container'>
-          <button className='filter-button' onClick={() => { handleFilter(PetsType.DOG); }}><DogIcon /></button>
-          <button className='filter-button' onClick={() => { handleFilter(PetsType.CAT); }}><CatIcon /></button>
+          <button
+            className='filter-button'
+            onClick={() => { handleFilter(PetsType.DOG); }}>
+            <DogIcon />
+          </button>
+          <button
+            className='filter-button'
+            onClick={() => { handleFilter(PetsType.CAT); }}>
+            <CatIcon />
+          </button>
         </div>
         <p className='text'>Resultados</p>
         <ListContainer pets={filteredPets} />
-      </section>
+      </section >
     </>
   );
-}
+};

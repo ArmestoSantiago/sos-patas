@@ -49,18 +49,44 @@
   position: relative;
 }
 
+
 .location-input {
-  border: 1px solid var(--input-background-color);
-  width: 28rem;
-  padding: .6rem 3.6rem;
-  border-radius: 2.5rem;
+  height: 5rem;
+  border-radius: 50rem;
 }
 
+.open-options {
+  border-radius: 2.5rem 2.5rem 0 0;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  border-collapse: collapse;
+  width: 28rem;
+  transition: 0.3s ease all;
+}
+
+
+.option-button {
+  padding: .4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+}
+
+.options-container:last-child {
+  border-radius: 25%;
+}
 .clear-input {
   position: absolute;
-  top: 52%;
-  transform: translateY(-50%);
+  top: 50%;
   right: 5%;
+  transform: translateY(-50%);
   background-color: var(--btn-background);
   color: #747574;
   padding: .2rem 1rem;
@@ -123,6 +149,15 @@
   height: 10rem;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.pet-text {
+  width: 12rem;
+  display: flex;
+}
+
+.pet-icon {
+  width: 3.2rem;
 }
 
 .pet-article{
@@ -204,10 +239,16 @@
     margin-top: 2.4rem;
   }
 
+  .options-container {
+    width: 26rem;
+  }
+
   .location-input {
     width: 26rem;
     padding: 1.2rem 3.2rem;
   }
+
+  
 /* //////// */
 
 /*//// Filter Buttons Resposive Styles ////*/
@@ -218,11 +259,11 @@
 
 /*//// Pet List Styles ////*/
   .list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     max-height: 120rem;
-  }
-
-  .pet-container {
-    gap: 12rem;
   }
 /* //////// */
 
@@ -258,6 +299,10 @@
   .location-input {
     width: 36rem;
     padding: 1.2rem 3.2rem;
+  }
+
+  .options-container {
+    width: 36rem;
   }
   /* //////// */
 }
