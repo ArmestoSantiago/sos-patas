@@ -1,0 +1,14 @@
+.loading-container {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-container > p {
+  font-size: 1.8rem;
+  color: #e4d37d;
+}
