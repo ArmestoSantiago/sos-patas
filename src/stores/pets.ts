@@ -1,10 +1,11 @@
 import { create } from 'zustand';
-import { PetsState } from '../types';
+import { PetsState } from '../types/types';
 import { getAnimalsList } from '../services/getAnimalsList';
 
 const initialState = {
   pets: await getAnimalsList()
 };
+
 export const usePetsStore = create<PetsState>((set) => {
   return {
     ...initialState

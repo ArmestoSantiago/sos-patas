@@ -3,7 +3,7 @@ import { CatIcon, DogIcon, AddIcon, ResetLocationIcon } from '../../icons/PageIc
 import { useLocationStore } from '../../stores/location';
 import { usePetsStore } from '../../stores/pets';
 import './MenuPanel.css';
-import { PetsType } from '../../types.d';
+import { PetsType } from '../../types/types.d';
 import { ListContainer } from './ListContainer';
 import { getLocationPrediction } from '../../services/getLocationPrediction';
 import { InputField } from './SearchInput';

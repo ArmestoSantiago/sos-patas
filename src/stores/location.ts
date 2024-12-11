@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { LocationState, MapType } from '../types.d';
+import { LocationState, MapType } from '../types/types';
 import { getLocation } from '../services/getLocation';
 
 const initialState: MapType = {
@@ -16,6 +16,7 @@ export const useLocationStore = create<LocationState>((set, get) => {
       if (isDraggable) set({ draggable: false });
       if (!isDraggable) set({ draggable: true });
     },
+
     resetLocation: () => set(initialState)
   };
 });
