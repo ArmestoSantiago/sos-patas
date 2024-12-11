@@ -8,6 +8,7 @@ export interface LocationState extends MapType {
 
 export interface MapType {
   location: Location;
+  setLoading: (boolean) => void;
 }
 
 export interface Location {
@@ -46,3 +47,4 @@ interface FormInformation {
   condition: PetsCondition;
   description: string;
 }
+
