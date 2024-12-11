@@ -1,20 +1,17 @@
-import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
-import { MAP_CONFIGURATION } from '../../const/const';
-import { MapType } from '../../types';
-import { useLocationStore } from '../../stores/location';
 import { usePetsStore } from '../../stores/pets';
+import { useLocationStore } from '../../stores/location';
 import { RenderMarkers } from './Markers';
-import { useState } from 'react';
+import { MapType } from '../../types/types';
+import { MAP_CONFIGURATION } from '../../const/const';
+import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
+import { customTimeout } from '../../timeout';
 
-export function Map({ location }: MapType) {
+export function Map({ location, setLoading }: MapType) {
   const GOOGLE_MAPS_APIKEY = import.meta.env.VITE_GOOGLE_MAPS_APIKEY;
   const draggable = useLocationStore(state => state.draggable);
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);
   const pets = usePetsStore(state => state.pets);
-  const [loaded, setLoaded] = useState<boolean>(false);
-
-  console.log(loaded);
 
   const handleClick = (map: MapEvent) => {
     console.log(map?.detail);
@@ -38,7 +35,7 @@ export function Map({ location }: MapType) {
   };
 
   return (
-    <APIProvider apiKey={GOOGLE_MAPS_APIKEY} libraries={['places']} onLoad={() => setLoaded(true)}>
+    <APIProvider apiKey={GOOGLE_MAPS_APIKEY} onLoad={() => customTimeout({ callback: setLoading, delay: 1000, args: false })}>
       <GoogleMap
         {...MAP_CONFIGURATION}
         center={draggable ? undefined : location}
