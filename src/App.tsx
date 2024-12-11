@@ -3,9 +3,13 @@ import { signIn } from './services/login';
 import { Map } from './components/Map/Map';
 import { MenuPanel } from './components/MenuPanel/MenuPanel';
 import './App.css';
+import { useState } from 'react';
+import { LoadingComponent } from './components/Loading/LoadingComponent';
 
 function App() {
   const location = useLocationStore(state => state.location);
+  const [loading, setLoading] = useState<boolean>(true);
+  console.log(loading);
 
   const handleLogIn = async () => {
     const userInfo = await signIn();
@@ -13,7 +17,12 @@ function App() {
 
   return (
     <main className='main-page'>
-      <Map location={location}></Map>
+      {loading && <LoadingComponent />}
+      <Map
+        location={location}
+        setLoading={setLoading}
+      >
+      </Map>
       <MenuPanel />
     </main>
   );
