@@ -28,7 +28,7 @@ const TEXTS_EN = {
   submitButton: 'Rescue!'
 };
 
-export function getLocalizedText(language: string | undefined = 'ES') {
+export function getLocalizedText(language: string = 'ES') {
   if (language !== 'ES') return TEXTS_EN;
 
   return TEXTS_ES;
