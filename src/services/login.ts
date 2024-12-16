@@ -1,17 +1,18 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { FIREBASE_APIKEY as apiKey, FIREBASE_AUTH_DOMAIN as authDomain, FIREBASE_PROJECT_ID as projectId, FIREBASE_STORAGE_BUCKET as storageBucket, FIREBASE_MESSAGIN_SENDER_ID as messagingSenderId, FIREBASE_APP_ID as appId } from '../config';
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGIN_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
+  apiKey,
+  authDomain,
+  projectId,
+  storageBucket,
+  messagingSenderId,
+  appId
 };
 
-const app = initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
@@ -24,7 +25,7 @@ export const signOutFn = () => {
     // An error happened.
     console.log('De acá no sale nadie');
   });
-}
+};
 
 export const signIn = async () => {
   return signInWithPopup(auth, provider)
@@ -43,6 +44,6 @@ export const signIn = async () => {
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
-      console.log(error)
+      console.log(error);
     });
-}
+};

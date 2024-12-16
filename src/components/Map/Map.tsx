@@ -4,10 +4,10 @@ import { RenderMarkers } from './Markers';
 import { MapType } from '../../types/types';
 import { MAP_CONFIGURATION } from '../../const/const';
 import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
-import { customTimeout } from '../../timeout';
+import { customTimeout } from '../../utils/timeout';
+import { GOOGLE_MAPS_APIKEY } from '../../config';
 
 export function Map({ location, setLoading }: MapType) {
-  const GOOGLE_MAPS_APIKEY = import.meta.env.VITE_GOOGLE_MAPS_APIKEY;
   const draggable = useLocationStore(state => state.draggable);
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);
