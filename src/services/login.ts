@@ -20,7 +20,6 @@ export const signOutFn = () => {
   return signOut(auth).then(() => {
     // Sign-out successful.
     console.log('Saliste');
-
   }).catch((error) => {
     // An error happened.
     console.log('De acá no sale nadie');
@@ -30,20 +29,14 @@ export const signOutFn = () => {
 export const signIn = async () => {
   return signInWithPopup(auth, provider)
     .then((result) => {
-
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-
-      return result.user;
+      const { displayName, uid, photoURL } = result.user;
+      const user = {
+        name: displayName ?? 'Usuario',
+        id: uid,
+        photo: photoURL ?? 'public/avatar.png'
+      };
+      return user;
     }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
       console.log(error);
     });
 };
