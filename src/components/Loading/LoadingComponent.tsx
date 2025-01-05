@@ -18,7 +18,6 @@ export function LoadingComponent() {
     return () => clearInterval(interval);
   });
 
-  console.log(loadingPhrases[curentPhrase]);
   return (
     <div className='loading-container'>
       <p>{loadingPhrases[curentPhrase]}</p>
