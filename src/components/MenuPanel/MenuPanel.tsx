@@ -3,15 +3,14 @@ import { CatIcon, DogIcon, AddIcon, ResetLocationIcon } from '../../icons/PageIc
 import { useLocationStore } from '../../stores/location';
 import { usePetsStore } from '../../stores/pets';
 import './MenuPanel.css';
-import { PetsType } from '../../types/types.d';
+import { PetsType } from '../../types/petTypes.d';
 import { ListContainer } from './ListContainer';
-import { getLocationPrediction } from '../../services/getLocationPrediction';
 import { InputField } from './SearchInput';
+import { GoogleLoginButton } from '../GoogleLoginButton/GoogleLoginButton';
 
 export function MenuPanel() {
   const resetLocation = useLocationStore(state => state.resetLocation);
   const [translate, setTranslate] = useState<boolean>(true);
-
   const [filter, setFilter] = useState<false | PetsType>(false);
   const pets = usePetsStore(state => state.pets);
 
@@ -28,10 +27,6 @@ export function MenuPanel() {
 
   const handleTranslate = () => {
     setTranslate(!translate);
-  };
-
-  const handleSearch = (input: string) => {
-    getLocationPrediction(input);
   };
 
   return (
@@ -63,8 +58,8 @@ export function MenuPanel() {
         </div>
         <p className='text'>Resultados</p>
         <ListContainer pets={filteredPets} />
+        <GoogleLoginButton />
       </section >
-
     </>
   );
 };
