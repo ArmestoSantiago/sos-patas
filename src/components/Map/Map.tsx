@@ -1,7 +1,7 @@
 import { usePetsStore } from '../../stores/pets';
 import { useLocationStore } from '../../stores/location';
 import { RenderMarkers } from './Markers';
-import { MapType } from '../../types/locationTypes';
+import { Location } from '../../types/locationTypes';
 import { MAP_CONFIGURATION } from '../../const/const';
 import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
 import { customTimeout } from '../../utils/timeout';
