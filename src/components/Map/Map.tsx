@@ -1,13 +1,18 @@
 import { usePetsStore } from '../../stores/pets';
 import { useLocationStore } from '../../stores/location';
 import { RenderMarkers } from './Markers';
-import { MapType } from '../../types/types';
+import { MapType } from '../../types/locationTypes';
 import { MAP_CONFIGURATION } from '../../const/const';
 import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
 import { customTimeout } from '../../utils/timeout';
 import { GOOGLE_MAPS_APIKEY } from '../../config';
 
-export function Map({ location, setLoading }: MapType) {
+interface MapProps {
+  location: Location,
+  setLoading: (args: boolean) => void;
+}
+
+export function Map({ location, setLoading }: MapProps) {
   const draggable = useLocationStore(state => state.draggable);
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);

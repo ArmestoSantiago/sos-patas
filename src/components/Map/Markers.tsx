@@ -1,5 +1,5 @@
 import { AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
-import { PetsState } from '../../types/types';
+import { PetsState } from '../../types/locationTypes';
 
 function Marker() {
   return <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />;

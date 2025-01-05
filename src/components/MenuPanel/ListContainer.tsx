@@ -1,4 +1,4 @@
-import { PetsState } from '../../types/types';
+import { PetsState } from '../../types/petTypes';
 
 export function ListContainer({ pets }: PetsState) {
 

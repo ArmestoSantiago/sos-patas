@@ -47,7 +47,7 @@ export function InputField() {
     setOptionsOpen(false);
   };
 
-  const handleClickOutside = (e) => {
+  const handleClickOutside = (e: MouseEvent) => {
     const isButton = e.target instanceof HTMLButtonElement;
 
     // Si el clic no es en un botón, limpiar las ubicaciones
