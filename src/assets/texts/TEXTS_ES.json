@@ -1,0 +1,41 @@
+{
+  "lang": "ES",
+  "instructions": {
+    "instructions0": {
+      "header": "Bienvenidos",
+      "description": "SOS Patas es un espacio donde todos podemos ayudar a los animales perdidos o abandonados a encontrar un hogar. Solo tienes que marcar en el mapa la ubicación del animal, ¡y aparecerá en la lista de mascotas que necesitan ser rescatadas!"
+    },
+    "instructions1": {
+      "header": "¡Activa tu ubicación para una mejor experiencia!",
+      "description": "Si lo has rechazado y quieres activarlo haz click en el boton de ubicación, acepta y vuelve a recargar la página"
+    },
+    "instructions2": {
+      "header": "",
+      "description": "Para añadir algun animalito que perdido o que creas que necesita ayuda has click en el boton de agregar, selecciona la ubicación de donde lo viste por última vez y completa el formulario"
+    },
+    "instructions3": {
+      "header": "Eso es todo!",
+      "description": "Para continuar elige conectarte con tu cuenta de Google o seguir como invitado. Si continuas como invitado todos los animales que agregues solo podran ser vistos por vos"
+    },
+    "buttons": {
+      "guest": "Continuar como invitado",
+      "next": "Siguiente"
+    }
+  },
+  "loadingScreenText": {
+    "text1": "Estamos preparando todo para que las mascotas tengan un hogar",
+    "text2": "Esto puede tardar un momentos",
+    "text3": "Gracias por usar SOSPatas"
+  },
+  "menuPanel": {
+    "petType": {
+      "dog": "Perro",
+      "cat": "Gato"
+    },
+    "petCondition": {
+      "healthy": "Sano",
+      "wounded": "Herido",
+      "critical": "Crítico"
+    }
+  }
+}
