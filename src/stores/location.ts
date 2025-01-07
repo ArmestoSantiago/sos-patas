@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { LocationState, MapType } from '../types/locationTypes';
+import { LocationState, MapType } from '../types/locationTypes.d';
 import { getLocation } from '../services/getLocation';
 
 const initialState: MapType = {

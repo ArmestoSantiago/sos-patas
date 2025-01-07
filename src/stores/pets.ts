@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { PetsState } from '../types/petTypes';
+import { PetsState } from '../types/petsTypes.d';
 import { getAnimalsList } from '../services/getAnimalsList';
 
 const initialState = {

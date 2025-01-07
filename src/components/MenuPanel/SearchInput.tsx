@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getLocationPrediction } from '../../services/getLocationPrediction';
 import { getGeocode } from '../../services/getGeocode';
 import { useLocationStore } from '../../stores/location';
-import { Location } from '../../types/geocodeTypes';
+import { Location } from '../../types/geocodeTypes.d';
 import { ThreeDots } from 'react-loader-spinner';
 import { LocationIcon } from '../../icons/PageIcons';
 
