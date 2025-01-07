@@ -185,18 +185,36 @@
 }
 /* //////// */
 
+/*//// User Container Style ////*/
+.userinfo-container {
+  padding: 1rem;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+
+.userinfo-container > img {
+  width: 7rem;
+  border-radius:  50%;
+}
+
+
                                   /*//// MEDIAS ////*/
 
 @media (max-width: 1200px) {
-/*//// Add/Relocate Buttons Responsive Style ////*/
-  .buttons_add_relocate-container-translate {
-    transform: translateY(750%);
-  }
-/* //////// */
+
 }
 
 
 @media (min-width: 1200px) {
+  /*//// Add/Relocate Buttons Responsive Style ////*/
+  .buttons_add_relocate-container-translate {
+    transform: translateY(750%);
+  }
+
+/* //////// */
+
 /*//// Menu Container General Responsive Styles ////*/
   .list-container {
     height: 70rem;
@@ -278,6 +296,12 @@
   .btn-add:hover {
     scale: 95%;
   }
+/* //////// */
+
+/*//// UserInfo container style ////*/
+.userinfo-container > img {
+  width: 10rem;
+}
 /* //////// */
 }
 
