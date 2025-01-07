@@ -8,4 +8,5 @@ export interface UserState {
   userInfo: User | null,
   userLogged: boolean;
   userLogIn: (user: User) => void;
+  userLogOut: () => void;
 }
