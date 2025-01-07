@@ -3,12 +3,17 @@ import { CatIcon, DogIcon, AddIcon, ResetLocationIcon } from '../../icons/PageIc
 import { useLocationStore } from '../../stores/location';
 import { usePetsStore } from '../../stores/pets';
 import './MenuPanel.css';
-import { PetsType } from '../../types/petTypes.d';
+import { PetsType } from '../../types/petsTypes.d';
 import { ListContainer } from './ListContainer';
 import { InputField } from './SearchInput';
-import { GoogleLoginButton } from '../GoogleLoginButton/GoogleLoginButton';
+import { GoogleLoginButton } from '../buttons/GoogleLoginButton/GoogleLoginButton';
+import { useUserStore } from '../../stores/users';
+import { GoogleLogoutButton } from '../buttons/GoogleLoginButton/GoogleLogoutButton';
+import { ChangeLanguageButton } from '../buttons/ChangeLanguageButton/ChangeLanguageButton';
 
 export function MenuPanel() {
+
+  const userInfo = useUserStore(state => state.userInfo);
   const resetLocation = useLocationStore(state => state.resetLocation);
   const [translate, setTranslate] = useState<boolean>(true);
   const [filter, setFilter] = useState<false | PetsType>(false);
@@ -43,6 +48,7 @@ export function MenuPanel() {
         <button onClick={handleTranslate} className='menu-toggler'>
           <div className='line-button'></div>
         </button>
+        <ChangeLanguageButton />
         <InputField />
         <div className='filter-container'>
           <button
@@ -58,7 +64,19 @@ export function MenuPanel() {
         </div>
         <p className='text'>Resultados</p>
         <ListContainer pets={filteredPets} />
-        <GoogleLoginButton />
+        {!userInfo && <GoogleLoginButton />}
+        {userInfo &&
+          (
+            <div className='userinfo-container'>
+              <div>
+                <p>{userInfo.name}</p>
+                <GoogleLogoutButton />
+              </div>
+              <img
+                src={userInfo.photo ? userInfo.photo : 'public/avatar.png'}
+                alt={`${userInfo.name} avatar`} />
+            </div>
+          )}
       </section >
     </>
   );
