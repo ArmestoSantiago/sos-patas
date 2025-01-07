@@ -1,22 +1,13 @@
-import { ColorRing } from 'react-loader-spinner';
 import './LoadingComponent.css';
-import { useEffect, useState } from 'react';
+import { ColorRing } from 'react-loader-spinner';
+import { useTextsStore } from '../../stores/texts';
+import { usePhraseInterval } from '../../hooks/usePhraseInterval';
 
 export function LoadingComponent() {
-  const loadingPhrases = ['Estamos preparando todo para que las mascotas tengan un hogar', 'Esto puede tardar unos momentos', 'Gracias por usar SOSPatas'];
-  const [curentPhrase, setCurrentPhrase] = useState<number>(0);
+  const texts = useTextsStore(state => state.texts.loadingScreenText);
+  const loadingPhrases = [texts.text1, texts.text2, texts.text3];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (curentPhrase === loadingPhrases.length - 1) {
-        setCurrentPhrase(0);
-        return;
-      }
-      setCurrentPhrase(prevState => prevState + 1);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  });
+  const curentPhrase = usePhraseInterval({ loadingPhrases, intervalTime: 1000 });
 
   return (
     <div className='loading-container'>

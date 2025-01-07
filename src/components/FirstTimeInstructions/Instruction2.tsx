@@ -1,11 +1,13 @@
 import { AddIcon } from '../../icons/PageIcons';
+import { Instructions } from '../../types/instructionsTypes.d';
 
-export function Instruction2({ handleNextGuide }: { handleNextGuide: () => void; }) {
+export function Instruction2({ handleNextGuide, pageTexts }: Instructions) {
+  const texts = pageTexts.instructions2;
   return (
     <div className="instruction2 instruction">
       <div className='add-btn-img'><AddIcon /></div>
-      <p>Para añadir algun animalito que perdido o que creas que necesita ayuda has click en el boton de agregar, selecciona la ubicación de donde lo viste por última vez y completa el formulario</p>
-      <button onClick={handleNextGuide}>Siguiente</button>
+      <p>{texts.description}</p>
+      <button onClick={handleNextGuide}>{pageTexts.buttons.next}</button>
     </div>
   );
 };

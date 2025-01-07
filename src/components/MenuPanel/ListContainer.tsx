@@ -1,15 +1,21 @@
-import { PetsState } from '../../types/petTypes';
+import { useTextsStore } from '../../stores/texts';
+import { PetsState } from '../../types/petsTypes.d';
+import { listContainerTextsGenerator } from '../../utils/listContainerTextsGenerator';
 
 export function ListContainer({ pets }: PetsState) {
+  const texts = useTextsStore(state => state.texts.menuPanel);
 
   return (
     <main className='list-container'>
       {pets.map(pet => {
-        const petTypeText = pet.type === 'DOG' ? 'Perro' : 'Gato';
-        const petTypeIcon = pet.type === 'DOG' ? '🐶' : '🐱';
-        const petConditionText = pet.condition === 'HEALTHY' ? 'Sano' : pet.condition === 'WOUNDED' ? 'Herido' : 'Critico';
-        const petConditionIcon = pet.condition === 'HEALTHY' ? '💚' : pet.condition === 'WOUNDED' ? '🟠' : '🩸';
-        const petDescriptionIcon = '📖';
+
+        const {
+          petTypeText,
+          petTypeIcon,
+          petConditionText,
+          petConditionIcon,
+          petDescriptionIcon
+        } = listContainerTextsGenerator(pet, texts);
 
         return (
           <article className='pet-article' key={pet.id}>

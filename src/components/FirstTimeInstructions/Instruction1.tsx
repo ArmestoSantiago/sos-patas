@@ -1,10 +1,13 @@
-export function Instruction1({ handleNextGuide }: { handleNextGuide: () => void; }) {
+import { Instructions } from '../../types/instructionsTypes.d';
+
+export function Instruction1({ handleNextGuide, pageTexts }: Instructions) {
+  const texts = pageTexts.instructions1;
   return (
     <div className="instruction1 instruction">
-      <p>¡Activa tu ubicación para una mejor experiencia!</p>
+      <p>{texts.header}</p>
       <img src="public/activate-ubication-img.png" alt="activate location image" />
-      <p>Si lo has rechazado y quieres activarlo haz click en el boton de ubicación, acepta y vuelve a recargar la página</p>
-      <button onClick={handleNextGuide}>Siguiente</button>
+      <p>{texts.description}</p>
+      <button onClick={handleNextGuide}>{pageTexts.buttons.next}</button>
     </div>
   );
 }

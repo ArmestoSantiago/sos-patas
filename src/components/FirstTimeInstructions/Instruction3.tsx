@@ -1,14 +1,15 @@
-import { GoogleLoginButton } from '../GoogleLoginButton/GoogleLoginButton';
+import { Instructions } from '../../types/instructionsTypes.d';
+import { GoogleLoginButton } from '../buttons/GoogleLoginButton/GoogleLoginButton';
 
-export function Instruction3({ handleNextGuide }: { handleNextGuide: () => void; }) {
-
+export function Instruction3({ handleNextGuide, pageTexts }: Instructions) {
+  const texts = pageTexts.instructions3;
   return (
     <div className="instruction3 instruction">
-      <h3>Eso es todo!</h3>
-      <p>Para continuar elige conectarte con tu cuenta de Google o seguir como invitado. Si continuas como invitado todos los animales que agregues solo podran ser vistos por vos</p>
+      <h3>{texts.header}</h3>
+      <p>{texts.description}</p>
       <GoogleLoginButton extraAction={handleNextGuide} />
       <button onClick={handleNextGuide} type="button">
-        Continuar como invitado
+        {pageTexts.buttons.guest}
       </button>
     </div>
   );
