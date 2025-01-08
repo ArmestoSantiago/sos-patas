@@ -1,3 +1,10 @@
+.button-container {
+  position: fixed;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .flex-cradle {
   display: flex;
   justify-content: center;
@@ -53,4 +60,13 @@
 
 .slider-cradle.is-transitioned .handle {
   transform: translateX(5rem);
+}
+
+
+@media (min-width: 1200px) {
+  .button-container {
+    top: 5%;
+    left: 90%;
+    transform: translateX(-50%);
+  }
 }

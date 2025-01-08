@@ -16,11 +16,13 @@ export function ChangeLanguageButton() {
   };
 
   return (
-    <div onClick={handleToggleLanguage} className="flex-cradle">
-      <div className={`slider-cradle ${textsLang === ValidLanguages.ES && 'is-transitioned'}`}>
-        <div className="option-2">ES</div>
-        <div className="option-1">EN</div>
-        <div className="handle"></div>
+    <div className='button-container'>
+      <div onClick={handleToggleLanguage} className="flex-cradle">
+        <div className={`slider-cradle ${textsLang === ValidLanguages.ES && 'is-transitioned'}`}>
+          <div className="option-2">ES</div>
+          <div className="option-1">EN</div>
+          <div className="handle"></div>
+        </div>
       </div>
     </div>
   );
