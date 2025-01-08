@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
   width: 100%;
   font-family: Helvetica;
 }
@@ -13,7 +12,7 @@
   width: 10rem;
   text-align: center;
   border-radius: 0.3rem;
-  background: #cacaca;
+  background: #37b24d;
   height: 5rem;
   position: relative;
   overflow: hidden;
@@ -49,7 +48,7 @@
 }
 
 .slider-cradle.is-transitioned {
-  background: #cacaca;
+  background: #37b24d;
 }
 
 .slider-cradle.is-transitioned .handle {
