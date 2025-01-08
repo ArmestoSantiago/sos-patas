@@ -1,6 +1,6 @@
 export interface TextsState {
   texts: Root;
-  setTexts: (lang: ValidLanguages) => void;
+  setLanguage: (lang: ValidLanguages) => void;
 }
 
 export enum ValidLanguages {

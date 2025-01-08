@@ -9,7 +9,7 @@ const initalState = {
 export const useTextsStore = create<TextsState>(set => {
   return {
     ...initalState,
-    setTexts: (lang: ValidLanguages) => {
+    setLanguage: (lang: ValidLanguages) => {
       const texts = getLocalizedText(lang);
       set({ texts });
     }
