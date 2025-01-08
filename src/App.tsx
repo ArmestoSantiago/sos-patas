@@ -21,7 +21,7 @@ function App() {
         setLoading={setLoading}
       >
       </Map>
-      <MenuPanel />
+      {!loading && <MenuPanel />}
     </main>
   );
 }
