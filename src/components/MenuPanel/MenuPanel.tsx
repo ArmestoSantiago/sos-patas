@@ -36,6 +36,7 @@ export function MenuPanel() {
 
   return (
     <>
+      <ChangeLanguageButton />
       <div className={`buttons_add_relocate-container ${translate && 'buttons_add_relocate-container-translate'}`}>
         <button
           onClick={resetLocation}
@@ -48,7 +49,6 @@ export function MenuPanel() {
         <button onClick={handleTranslate} className='menu-toggler'>
           <div className='line-button'></div>
         </button>
-        <ChangeLanguageButton />
         <InputField />
         <div className='filter-container'>
           <button

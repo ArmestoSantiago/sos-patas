@@ -5,7 +5,7 @@ export const listContainerTextsGenerator = (pet: PetsInformation, texts: MenuPan
   const petTypeText = pet.type === PetsType.DOG ? texts.petType.dog : texts.petType.cat;
   const petTypeIcon = pet.type === PetsType.DOG ? '🐶' : '🐱';
   const petConditionText = pet.condition === PetsCondition.HEALTHY ? texts.petCondition.healthy : pet.condition === PetsCondition.WOUNDED ? texts.petCondition.wounded : texts.petCondition.critical;
-  const petConditionIcon = pet.condition === texts.petCondition.healthy ? '💚' : pet.condition === PetsCondition.WOUNDED ? '🟠' : '🩸';
+  const petConditionIcon = pet.condition === PetsCondition.HEALTHY ? '💚' : pet.condition === PetsCondition.WOUNDED ? '🟠' : '🩸';
   const petDescriptionIcon = '📖';
 
   return {
