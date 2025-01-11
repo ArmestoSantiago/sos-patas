@@ -13,6 +13,12 @@ export interface Root {
   instructions: Instructions;
   loadingScreenText: LoadingScreenText;
   menuPanel: MenuPanel;
+  googleButtons: GoogleButtons;
+}
+
+export interface GoogleButtons {
+  login: string;
+  logout: string;
 }
 
 export interface Instructions {
