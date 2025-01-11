@@ -7,7 +7,7 @@ export function Instruction3({ handleNextGuide, pageTexts }: Instructions) {
     <div className="instruction3 instruction">
       <h3>{texts.header}</h3>
       <p>{texts.description}</p>
-      <GoogleLoginButton extraAction={handleNextGuide} />
+      <GoogleLoginButton type={true} extraAction={handleNextGuide} />
       <button onClick={handleNextGuide} type="button">
         {pageTexts.buttons.guest}
       </button>
