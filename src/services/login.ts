@@ -16,7 +16,7 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
-export const signOutFn = () => {
+export const signOutFn = async () => {
   return signOut(auth).then(() => {
     // Sign-out successful.
     console.log('Saliste');
