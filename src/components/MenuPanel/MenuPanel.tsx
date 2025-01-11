@@ -8,7 +8,6 @@ import { ListContainer } from './ListContainer';
 import { InputField } from './SearchInput';
 import { GoogleLoginButton } from '../buttons/GoogleLoginButton/GoogleLoginButton';
 import { useUserStore } from '../../stores/users';
-import { GoogleLogoutButton } from '../buttons/GoogleLoginButton/GoogleLogoutButton';
 import { ChangeLanguageButton } from '../buttons/ChangeLanguageButton/ChangeLanguageButton';
 
 export function MenuPanel() {
@@ -64,13 +63,13 @@ export function MenuPanel() {
         </div>
         <p className='text'>Resultados</p>
         <ListContainer pets={filteredPets} />
-        {!userInfo && <GoogleLoginButton />}
+        {!userInfo && <GoogleLoginButton method={true} />}
         {userInfo &&
           (
             <div className='userinfo-container'>
               <div>
                 <p>{userInfo.name}</p>
-                <GoogleLogoutButton />
+                <GoogleLoginButton method={false} />
               </div>
               <img
                 src={userInfo.photo ? userInfo.photo : 'public/avatar.png'}
