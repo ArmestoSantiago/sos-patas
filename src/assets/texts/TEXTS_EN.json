@@ -37,5 +37,9 @@
       "wounded": "Wounded",
       "critical": "Critical"
     }
+  },
+  "googleButtons": {
+    "login": "Log in with Google",
+    "logout": "Sign out from Google"
   }
 }
