@@ -48,6 +48,7 @@ export interface LoadingScreenText {
 export interface MenuPanel {
   petType: PetType;
   petCondition: PetCondition;
+  result: string;
 }
 
 export interface PetType {
