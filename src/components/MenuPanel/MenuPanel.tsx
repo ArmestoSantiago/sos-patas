@@ -6,16 +6,16 @@ import './MenuPanel.css';
 import { PetsType } from '../../types/petsTypes.d';
 import { ListContainer } from './ListContainer';
 import { InputField } from './SearchInput';
-import { GoogleLoginButton } from '../buttons/GoogleLoginButton/GoogleLoginButton';
-import { useUserStore } from '../../stores/users';
 import { ChangeLanguageButton } from '../buttons/ChangeLanguageButton/ChangeLanguageButton';
+import { UserInfo } from './UserInfo';
+import { useTextsStore } from '../../stores/texts';
 
 export function MenuPanel() {
 
-  const userInfo = useUserStore(state => state.userInfo);
   const resetLocation = useLocationStore(state => state.resetLocation);
   const [translate, setTranslate] = useState<boolean>(true);
   const [filter, setFilter] = useState<false | PetsType>(false);
+  const texts = useTextsStore(state => state.texts.menuPanel);
   const pets = usePetsStore(state => state.pets);
 
   const handleFilter = (type: PetsType) => {
@@ -61,21 +61,9 @@ export function MenuPanel() {
             <CatIcon />
           </button>
         </div>
-        <p className='text'>Resultados</p>
+        <p className='text'>{texts.result}</p>
         <ListContainer pets={filteredPets} />
-        {!userInfo && <GoogleLoginButton method={true} />}
-        {userInfo &&
-          (
-            <div className='userinfo-container'>
-              <div>
-                <p>{userInfo.name}</p>
-                <GoogleLoginButton method={false} />
-              </div>
-              <img
-                src={userInfo.photo ? userInfo.photo : 'public/avatar.png'}
-                alt={`${userInfo.name} avatar`} />
-            </div>
-          )}
+        <UserInfo />
       </section >
     </>
   );
