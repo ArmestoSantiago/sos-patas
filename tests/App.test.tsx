@@ -35,5 +35,4 @@ describe('<MenuPanel />', async () => {
 
     expect(articles.length).toBe(pets.length);
   });
-
 });
