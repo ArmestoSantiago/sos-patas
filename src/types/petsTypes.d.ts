@@ -11,6 +11,7 @@ export interface PetsInformation {
   condition: PetsCondition;
   description: string;
   imgSrc?: string;
+  address: string;
 }
 
 export enum PetsType {
