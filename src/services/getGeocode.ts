@@ -1,9 +1,10 @@
-import { GOOGLE_GEOCODE_APIKEY } from '../config';
+import { GOOGLE_GEOCODE_APIKEY, GOOGLE_GEOCODE_URL } from '../config';
 import { General } from '../types/geocodeTypes.d';
 
-export async function getGeocode(location: string) {
+export const getGeocode = async (location: string) => {
   // Transfor from location name to location coords to change the map position
-  return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${GOOGLE_GEOCODE_APIKEY}`)
+  const GEOCODE_URL = `${GOOGLE_GEOCODE_URL}/json?address=${location}&key=${GOOGLE_GEOCODE_APIKEY}`;
+  return fetch(GEOCODE_URL)
     .then(res => res.json())
     .then((data: General) => data.results[0].geometry.location);
-}
+};

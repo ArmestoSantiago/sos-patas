@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, test, vi } from 'vitest';
 import React from 'react';
 import { GoogleLoginButton } from '../src/components/buttons/GoogleLoginButton/GoogleLoginButton';
 import { render, screen } from '@testing-library/react';
