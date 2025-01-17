@@ -215,6 +215,8 @@
 /*//// Menu Container General Responsive Styles ////*/
   .list-container {
     height: 70rem;
+    align-items: flex-start; /* Evita que se centren y asegura un alineamiento correcto */
+    justify-content: flex-start;
   }
   .menu-container {
     width: 44rem;
@@ -294,6 +296,10 @@
     scale: 95%;
   }
 /* //////// */
+
+.pet-article:first-child {
+  margin-top: 40rem;
+}
 
 /*//// UserInfo container style ////*/
 .userinfo-container > img {
