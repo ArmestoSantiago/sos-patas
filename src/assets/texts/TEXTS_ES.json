@@ -42,5 +42,8 @@
   "googleButtons": {
     "login": "Continuar con Google",
     "logout": "Cerrar sesión"
+  },
+  "addAnimalsForm": {
+    "type": "Tipo"
   }
 }

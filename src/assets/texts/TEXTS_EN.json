@@ -42,5 +42,8 @@
   "googleButtons": {
     "login": "Log in with Google",
     "logout": "Sign out from Google"
+  },
+  "addAnimalsForm": {
+    "type": "Type"
   }
 }
