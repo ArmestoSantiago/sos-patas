@@ -1,4 +1,4 @@
-import { describe, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import React from 'react';
 import { GoogleLoginButton } from '../src/components/buttons/GoogleLoginButton/GoogleLoginButton';
 import { render, screen } from '@testing-library/react';
@@ -10,10 +10,12 @@ vi.mock('../../../stores/texts', async () => ({
   }))
 }));
 
-describe('<GoogleLoginButton />', () => {
-  test('Button should render', () => {
+describe('<GoogleLoginButton />', async () => {
+  test('Button should render', async () => {
 
     render(<GoogleLoginButton method={true} />);
-    screen.debug();
+    const loginButton = await screen.findByText('Log in with Google');
+
+    expect(loginButton).toBeDefined();
   });
 });
