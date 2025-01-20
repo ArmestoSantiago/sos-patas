@@ -14,6 +14,11 @@ export interface Root {
   loadingScreenText: LoadingScreenText;
   menuPanel: MenuPanel;
   googleButtons: GoogleButtons;
+  addAnimalsForm: AddAnimalsForm;
+}
+
+export interface AddAnimalsForm {
+  type: string;
 }
 
 export interface GoogleButtons {
