@@ -41,7 +41,7 @@ export function InputField() {
 
     const lat = locationCoords.lat;
     const lng = locationCoords.lng;
-    console.log(lat, lng);
+
     newLocation(lat, lng);
     setLocations([]);
     setOptionsOpen(false);
@@ -50,7 +50,7 @@ export function InputField() {
   const handleClickOutside = (e: MouseEvent) => {
     const isButton = e.target instanceof HTMLButtonElement;
 
-    // Si el clic no es en un botón, limpiar las ubicaciones
+    // If element is not a button then clear the menu
     if (!isButton) {
       setLocations([]);
       setOptionsOpen(false);
