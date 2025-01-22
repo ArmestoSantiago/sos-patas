@@ -26,7 +26,8 @@ export enum PetsCondition {
 }
 
 interface FormInformation {
-  especie: PetsType;
-  condition: PetsCondition;
-  description: string;
+  petType: PetsType;
+  petCondition: PetsCondition;
+  petDescription: string;
+  petImg: File;
 }

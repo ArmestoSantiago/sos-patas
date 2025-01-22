@@ -24,6 +24,7 @@ export interface AddAnimalsForm {
   petCondition: PetCondition;
   upload: string;
   done: string;
+  textareaPlaceholder: string;
 }
 
 export interface GoogleButtons {
