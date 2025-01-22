@@ -44,6 +44,17 @@
     "logout": "Cerrar sesión"
   },
   "addAnimalsForm": {
-    "type": "Tipo"
+    "primaryMessage": "Gracias por ayudarlos",
+    "petType": {
+      "dog": "Perro",
+      "cat": "Gato"
+    },
+    "petCondition": {
+      "healthy": "Sano",
+      "wounded": "Herido",
+      "critical": "Critico"
+    },
+    "upload": "Subir",
+    "done": "¡Hecho!"
   }
 }

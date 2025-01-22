@@ -44,6 +44,17 @@
     "logout": "Sign out from Google"
   },
   "addAnimalsForm": {
-    "type": "Type"
+    "primaryMessage": "Thanks for helping them",
+    "petType": {
+      "dog": "Dog",
+      "cat": "Cat"
+    },
+    "petCondition": {
+      "healthy": "Healthy",
+      "wounded": "Wounded",
+      "critical": "Critical"
+    },
+    "upload": "Upload",
+    "done": "Done!"
   }
 }
