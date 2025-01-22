@@ -55,6 +55,7 @@
       "critical": "Critico"
     },
     "upload": "Subir",
-    "done": "¡Hecho!"
+    "done": "¡Hecho!",
+    "textareaPlaceholder": "Amable, super bonito. Tiene una herida en una de las patas delanteras"
   }
 }

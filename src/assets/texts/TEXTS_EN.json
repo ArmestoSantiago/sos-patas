@@ -55,6 +55,7 @@
       "critical": "Critical"
     },
     "upload": "Upload",
-    "done": "Done!"
+    "done": "Done!",
+    "textareaPlaceholder": "Friendly, super pretty. He has a wound on one of his front legs."
   }
 }
