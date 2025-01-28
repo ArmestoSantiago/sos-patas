@@ -54,8 +54,14 @@
       "wounded": "Wounded",
       "critical": "Critical"
     },
-    "upload": "Upload",
-    "done": "Done!",
-    "textareaPlaceholder": "Friendly, super pretty. He has a wound on one of his front legs."
+    "pageTexts": {
+      "upload": "Upload",
+      "done": "Done!",
+      "textareaPlaceholder": "Friendly, super pretty. He has a wound on one of his front legs.",
+      "conditionSpanText": "Condition",
+      "typeSpanText": "Type",
+      "descriptionSpanText": "Description",
+      "photoSpanText": "Photo" 
+    }
   }
 }

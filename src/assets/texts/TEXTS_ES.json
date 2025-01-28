@@ -56,6 +56,10 @@
     },
     "upload": "Subir",
     "done": "¡Hecho!",
-    "textareaPlaceholder": "Amable, super bonito. Tiene una herida en una de las patas delanteras"
+    "textareaPlaceholder": "Amable, super bonito. Tiene una herida en una de las patas delanteras",
+    "conditionSpanText": "Condición",
+    "typeSpanText": "Tipo",
+    "descriptionSpanText": "Descripción",
+    "photoSpanText": "Foto"
   }
 }
