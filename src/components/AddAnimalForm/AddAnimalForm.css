@@ -1,0 +1,36 @@
+.add-animals_container {  
+  justify-content: center;
+  background-color: aquamarine;
+  margin: .4rem;
+  text-align: center;
+  border-radius: 25px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.animal-form {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem
+}
+
+.upload-img_button {
+  background-color: azure;
+  border-radius: 50%;
+  width: 6rem;
+  border: 1px dashed #aaa;
+  height: 6rem;
+}
+
+.add-animals_header-text {
+  padding-top: 10rem;
+  margin-bottom: 5rem;
+  font-size: 1.5rem;
+}
+
+.file-input {
+  display: none;
+}
