@@ -15,6 +15,7 @@ export interface Root {
   menuPanel: MenuPanel;
   googleButtons: GoogleButtons;
   addAnimalsForm: AddAnimalsForm;
+
 }
 
 export interface AddAnimalsForm {
@@ -22,9 +23,17 @@ export interface AddAnimalsForm {
   primaryMessage: string;
   petType: PetType;
   petCondition: PetCondition;
+  pageTexts: pageTexts;
+}
+
+export interface pageTexts {
   upload: string;
   done: string;
   textareaPlaceholder: string;
+  conditionSpanText: string;
+  typeSpanText: string;
+  descriptionSpanText: string;
+  photoSpanText: string;
 }
 
 export interface GoogleButtons {
