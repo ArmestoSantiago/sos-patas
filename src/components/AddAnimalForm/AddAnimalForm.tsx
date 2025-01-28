@@ -22,14 +22,14 @@ export function AddAnimalForm() {
       <h2 className='add-animals_header-text'>{texts.primaryMessage}💖</h2>
       <form onSubmit={handleSubmit} className='animal-form'>
         <div className='form-field'>
-          <span>Type</span>
+          <span>{texts.pageTexts.typeSpanText}</span>
           <select className='' name='petType' required>
             <option value={PetsType.DOG}>{texts.petType.dog} 🐶</option>
             <option value={PetsType.CAT}>{texts.petType.cat} 🐱</option>
           </select>
         </div>
         <div className='form-field'>
-          <span>Condition</span>
+          <span>{texts.pageTexts.conditionSpanText}</span>
           <select className='' name="petCondition" required>
             <option value={PetsCondition.HEALTHY}>{texts.petCondition.healthy} 💚</option>
             <option value={PetsCondition.WOUNDED}>{texts.petCondition.wounded} 🟠</option>
@@ -37,11 +37,11 @@ export function AddAnimalForm() {
           </select>
         </div>
         <div className='form-field'>
-          <span>Description</span>
-          <input type="textarea" name="petDescription" placeholder={texts.textareaPlaceholder} maxLength={111}></input>
+          <span>{texts.pageTexts.descriptionSpanText}</span>
+          <input type="textarea" name="petDescription" placeholder={texts.pageTexts.textareaPlaceholder} maxLength={111}></input>
         </div>
         <div className='form-field'>
-          <span>Photo</span>
+          <span>{texts.pageTexts.photoSpanText}</span>
           <input
             name="petImg"
             type='file'
@@ -50,11 +50,11 @@ export function AddAnimalForm() {
           />
           <button type='button' className='upload-img_button' onClick={handleChargeFile}>
             +
-            <p>{texts.upload}</p>
+            <p>{texts.pageTexts.upload}</p>
           </button>
         </div>
         <div className='form-field'>
-          <button type='submit'>{texts.done}</button>
+          <button type='submit'>{texts.pageTexts.done}</button>
         </div>
       </form>
     </div>
