@@ -1,5 +1,5 @@
-import { AddIcon } from '../../icons/PageIcons';
-import { Instructions } from '../../types/instructionsTypes.d';
+import { AddIcon } from '@icons/PageIcons';
+import { Instructions } from '@/types/instructionsTypes.d';
 
 export function Instruction2({ handleNextGuide, pageTexts }: Instructions) {
   const texts = pageTexts.instructions2;

@@ -1,4 +1,4 @@
-import { CONST } from '../const/const';
+import { CONST } from '@/const/const';
 
 export const getLocation = async () => {
   let position;

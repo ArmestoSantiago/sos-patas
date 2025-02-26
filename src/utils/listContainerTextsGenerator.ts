@@ -1,5 +1,5 @@
-import { PetsCondition, PetsInformation, PetsType } from '../types/petsTypes.d';
-import { MenuPanel } from '../types/textsTypes.d';
+import { PetsCondition, PetsInformation, PetsType } from '@/types/petsTypes.d';
+import { MenuPanel } from '@/types/textsTypes.d';
 
 export const listContainerTextsGenerator = (pet: PetsInformation, texts: MenuPanel) => {
   const petTypeText = pet.type === PetsType.DOG ? texts.petType.dog : texts.petType.cat;

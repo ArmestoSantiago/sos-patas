@@ -1,5 +1,5 @@
-import { Instructions } from '../../types/instructionsTypes.d';
-import { GoogleLoginButton } from '../buttons/GoogleLoginButton/GoogleLoginButton';
+import { Instructions } from '@/types/instructionsTypes.d';
+import { GoogleLoginButton } from '@components/buttons/GoogleLoginButton/GoogleLoginButton';
 
 export function Instruction3({ handleNextGuide, pageTexts }: Instructions) {
   const texts = pageTexts.instructions3;

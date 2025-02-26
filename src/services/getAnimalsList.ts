@@ -1,4 +1,4 @@
-import { API_URL } from '../config';
+import { API_URL } from '@/config';
 
 export const getAnimalsList = async () => {
   // Fetch AnimalList from SOSPatas DB

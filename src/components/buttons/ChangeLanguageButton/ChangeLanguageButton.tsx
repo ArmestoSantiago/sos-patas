@@ -1,5 +1,5 @@
-import { useTextsStore } from '../../../stores/texts';
-import { ValidLanguages } from '../../../types/textsTypes.d';
+import { useTextsStore } from '@stores/texts';
+import { ValidLanguages } from '@/types/textsTypes.d';
 import './ChangeLanguageButton.css';
 
 export function ChangeLanguageButton() {

@@ -1,6 +1,6 @@
 import { ValidLanguages } from '../types/textsTypes.d';
-import TEXT_ES from '../assets/texts/TEXTS_ES.json';
-import TEXT_EN from '../assets/texts/TEXTS_EN.json';
+import TEXT_ES from '@/assets/texts/TEXTS_ES.json';
+import TEXT_EN from '@/assets/texts/TEXTS_EN.json';
 
 export const getLocalizedText = (lang: ValidLanguages | '') => {
   // Return text pages based on the language preference of the user

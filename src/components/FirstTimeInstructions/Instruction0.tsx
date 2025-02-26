@@ -1,4 +1,4 @@
-import { Instructions } from '../../types/instructionsTypes.d';
+import { Instructions } from '@/types/instructionsTypes.d';
 
 export function Instruction0({ handleNextGuide, pageTexts }: Instructions) {
   const texts = pageTexts.instructions0;

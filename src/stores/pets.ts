@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { PetsState } from '../types/petsTypes.d';
-import { getAnimalsList } from '../services/getAnimalsList';
+import { PetsState } from '@/types/petsTypes.d';
+import { getAnimalsList } from '@services/getAnimalsList';
 
 const initialState = {
   pets: await getAnimalsList()

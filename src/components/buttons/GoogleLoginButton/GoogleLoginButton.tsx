@@ -1,6 +1,6 @@
-import { signIn, signOutFn } from '../../../services/login';
-import { useTextsStore } from '../../../stores/texts';
-import { useUserStore } from '../../../stores/users';
+import { signIn, signOutFn } from '@services/login';
+import { useTextsStore } from '@stores/texts';
+import { useUserStore } from '@stores/users';
 import './GoogleLoginButton.css';
 
 interface GoogleLoginButtonProps {

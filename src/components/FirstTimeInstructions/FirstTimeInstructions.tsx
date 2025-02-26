@@ -4,7 +4,7 @@ import { Instruction0 } from './Instruction0';
 import { Instruction1 } from './Instruction1';
 import { Instruction2 } from './Instruction2';
 import { Instruction3 } from './Instruction3';
-import { useTextsStore } from '../../stores/texts';
+import { useTextsStore } from '@stores/texts';
 
 export function FirstTimeInstruction() {
   const [actualGuideIndex, setActualGuideIndex] = useState<number>(0);

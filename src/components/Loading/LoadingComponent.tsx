@@ -1,7 +1,7 @@
 import './LoadingComponent.css';
 import { ColorRing } from 'react-loader-spinner';
-import { useTextsStore } from '../../stores/texts';
-import { usePhraseInterval } from '../../hooks/usePhraseInterval';
+import { useTextsStore } from '@stores/texts';
+import { usePhraseInterval } from '@hooks/usePhraseInterval';
 
 export function LoadingComponent() {
   const texts = useTextsStore(state => state.texts.loadingScreenText);

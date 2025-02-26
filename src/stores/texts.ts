@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { getLocalizedText } from '../utils/getLocalizedText';
-import { TextsState, ValidLanguages } from '../types/textsTypes.d';
+import { getLocalizedText } from '@utils/getLocalizedText';
+import { TextsState, ValidLanguages } from '@/types/textsTypes.d';
 
 const initalState = {
   texts: getLocalizedText('')

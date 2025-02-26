@@ -1,5 +1,5 @@
-import { GOOGLE_GEOCODE_APIKEY, GOOGLE_GEOCODE_URL } from '../config';
-import { General } from '../types/geocodeTypes.d';
+import { GOOGLE_GEOCODE_APIKEY, GOOGLE_GEOCODE_URL } from '@/config';
+import { General } from '@/types/geocodeTypes.d';
 
 export const getGeocode = async (location: string) => {
   // Transfor from location name to location coords to change the map position
