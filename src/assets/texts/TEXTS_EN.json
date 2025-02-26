@@ -61,7 +61,11 @@
       "conditionSpanText": "Condition",
       "typeSpanText": "Type",
       "descriptionSpanText": "Description",
-      "photoSpanText": "Photo" 
+      "photoSpanText": "Photo",
+      "postedText": "Animal Posted!",
+      "publicationsError": "Too many publication for this user",
+      "validationError": "Error: Complete fields with valid information",
+      "keke": "keke"
     }
   }
 }

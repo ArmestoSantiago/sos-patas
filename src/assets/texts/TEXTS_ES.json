@@ -54,12 +54,17 @@
       "wounded": "Herido",
       "critical": "Critico"
     },
-    "upload": "Subir",
-    "done": "¡Hecho!",
-    "textareaPlaceholder": "Amable, super bonito. Tiene una herida en una de las patas delanteras",
-    "conditionSpanText": "Condición",
-    "typeSpanText": "Tipo",
-    "descriptionSpanText": "Descripción",
-    "photoSpanText": "Foto"
+    "pageTexts": {
+      "upload": "Subir",
+      "done": "¡Hecho!",
+      "textareaPlaceholder": "Amable, super bonito. Tiene una herida en una de las patas delanteras",
+      "conditionSpanText": "Condición",
+      "typeSpanText": "Tipo",
+      "descriptionSpanText": "Descripción",
+      "photoSpanText": "Foto",
+      "postedText": "Animal publicado!",
+      "publicationsError": "Demasiados publicaciones para este usuario",
+      "validationError": "Error: Rellene los campos con información valida"
+    }
   }
 }
