@@ -1,22 +1,27 @@
 import { useMemo, useState } from 'react';
-import { CatIcon, DogIcon, AddIcon, ResetLocationIcon } from '../../icons/PageIcons';
-import { useLocationStore } from '../../stores/location';
-import { usePetsStore } from '../../stores/pets';
+import { AddIcon, CatIcon, DogIcon, ResetLocationIcon } from '@icons/PageIcons';
+import { useLocationStore } from '@stores/location';
+import { usePetsStore } from '@stores/pets';
 import './MenuPanel.css';
-import { PetsType } from '../../types/petsTypes.d';
+import { PetsType } from '@/types/petsTypes.d';
 import { ListContainer } from './ListContainer';
 import { InputField } from './SearchInput';
-import { ChangeLanguageButton } from '../buttons/ChangeLanguageButton/ChangeLanguageButton';
+import { ChangeLanguageButton } from '@components/buttons/ChangeLanguageButton/ChangeLanguageButton';
 import { UserInfo } from './UserInfo';
-import { useTextsStore } from '../../stores/texts';
+import { useTextsStore } from '@stores/texts';
 
 export function MenuPanel() {
 
   const resetLocation = useLocationStore(state => state.resetLocation);
+  const setToAddAnimal = useLocationStore(state => state.setToAddAnimal);
   const [translate, setTranslate] = useState<boolean>(true);
   const [filter, setFilter] = useState<false | PetsType>(false);
   const texts = useTextsStore(state => state.texts.menuPanel);
   const pets = usePetsStore(state => state.pets);
+
+  const handleAddAnimal = () => {
+    setToAddAnimal(true);
+  };
 
   const handleFilter = (type: PetsType) => {
     if (filter === type) return setFilter(false);
@@ -42,7 +47,7 @@ export function MenuPanel() {
           className='btn btn-relocate'>
           <ResetLocationIcon />
         </button>
-        <button className='btn btn-add'><AddIcon /></button>
+        <button onClick={handleAddAnimal} className='btn btn-add'><AddIcon /></button>
       </div>
       <section className={`menu-container ${translate && 'menu-container-translate'}`}>
         <button onClick={handleTranslate} className='menu-toggler'>

@@ -1,11 +1,11 @@
-import { usePetsStore } from '../../stores/pets';
-import { useLocationStore } from '../../stores/location';
+import { usePetsStore } from '@stores/pets';
+import { useLocationStore } from '@stores/location';
 import { RenderMarkers } from './Markers';
-import { Location } from '../../types/locationTypes';
-import { MAP_CONFIGURATION } from '../../const/const';
+import { Location } from '@/types/locationTypes';
+import { MAP_CONFIGURATION } from '@/const/const';
 import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
-import { customTimeout } from '../../utils/timeout';
-import { GOOGLE_MAPS_APIKEY } from '../../config';
+import { customTimeout } from '@utils/timeout';
+import { GOOGLE_MAPS_APIKEY } from '@/config';
 
 interface MapProps {
   location: Location,
@@ -14,12 +14,25 @@ interface MapProps {
 
 export function Map({ location, setLoading }: MapProps) {
   const draggable = useLocationStore(state => state.draggable);
+  const toAddAnimal = useLocationStore(state => state.toAddAnimal);
+  const setToAddAnimal = useLocationStore(state => state.setToAddAnimal);
+  const setLocationNewAnimal = useLocationStore(state => state.setLocationNewAnimal);
+  const setOpenForm = useLocationStore(state => state.setOpenForm);
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);
   const pets = usePetsStore(state => state.pets);
 
-  const handleClick = (map: MapEvent) => {
-    console.log(map?.detail);
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (toAddAnimal || e.key === 'Escape') setToAddAnimal(false);
+  });
+
+  const handleAddAnimal = (map: MapEvent) => {
+    // Change cursor style to crosshair so user can select location where to add pet on list. 
+    // Then change locationNewAnimal state to the location user selected
+    if (!toAddAnimal) return;
+    const { lat, lng } = map.detail.latLng;
+    setLocationNewAnimal(lat, lng);
+    setOpenForm();
   };
 
   const handleDragStart = () => {
@@ -47,7 +60,8 @@ export function Map({ location, setLoading }: MapProps) {
         defaultCenter={draggable ? location : undefined}
         onDragstart={handleDragStart}
         onDragend={(map) => handleDragEnd(map)}
-        onClick={(map) => handleClick(map)}
+        onClick={(map) => handleAddAnimal(map)}
+        draggableCursor={toAddAnimal ? 'crosshair' : ''}
       >
         <RenderMarkers pets={pets}></RenderMarkers>
       </GoogleMap>
