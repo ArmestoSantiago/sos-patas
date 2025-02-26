@@ -1,36 +1,116 @@
-.add-animals_container {  
-  justify-content: center;
-  background-color: aquamarine;
-  margin: .4rem;
+.add-animals_container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center; /* Centra verticalmente */
+  background: linear-gradient(to bottom, #a0e7e5, #b4f8c8);
+  padding: 2rem;
+  margin: 1rem auto;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  max-width: 35rem;
+  width: 90%;
+  min-height: 85vh; /* Aumenta la altura */
 }
-.form-field {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
+
 
 .animal-form {
   display: flex;
   flex-direction: column;
-  gap: .3rem
+  gap: 1.2rem;
+  width: 100%;
+  background: transparent;
 }
 
-.upload-img_button {
-  background-color: azure;
-  border-radius: 50%;
-  width: 6rem;
-  border: 1px dashed #aaa;
-  height: 6rem;
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .add-animals_header-text {
-  padding-top: 10rem;
-  margin-bottom: 5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.form-select, .text-area {
+  width: 90%;
+  max-width: 25rem;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.text-area {
+  text-align: start;
+  height: 10rem;
+  resize: vertical;
+}
+.close-button-container {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.upload-img_button {
+  background-color: #f9f9f9;
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  border: 2px dashed #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.upload-img_button:hover {
+  background-color: #e0e0e0;
+}
+
+.upload-img_button p {
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .file-input {
   display: none;
+}
+
+button[type="submit"] {
+  background-color: #32CD32; /* Verde suave */
+  color: white;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #ff4f4f;
+}
+
+
+@media (min-width: 1200px) {
+  .add-animals_container {
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);    
+  }
 }
