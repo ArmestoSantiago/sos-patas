@@ -1,13 +1,15 @@
-import { useTextsStore } from '../../stores/texts';
-import { PetsState } from '../../types/petsTypes.d';
-import { listContainerTextsGenerator } from '../../utils/listContainerTextsGenerator';
+import { useTextsStore } from '@stores/texts';
+import { PetsState } from '@/types/petsTypes.d';
+import { listContainerTextsGenerator } from '@utils/listContainerTextsGenerator';
+import { petsPostedLocal } from '@/const/const';
 
 export function ListContainer({ pets }: PetsState) {
   const texts = useTextsStore(state => state.texts.menuPanel);
+  const petsToRender = pets.concat(petsPostedLocal);
 
   return (
     <main className='list-container'>
-      {pets.map(pet => {
+      {petsToRender.map(pet => {
 
         const {
           petTypeText,
