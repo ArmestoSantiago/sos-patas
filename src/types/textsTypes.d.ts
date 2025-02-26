@@ -34,6 +34,9 @@ export interface pageTexts {
   typeSpanText: string;
   descriptionSpanText: string;
   photoSpanText: string;
+  postedText: string;
+  publicationsError: string;
+  validationError: string;
 }
 
 export interface GoogleButtons {

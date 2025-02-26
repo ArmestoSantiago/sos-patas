@@ -3,8 +3,17 @@ export interface PetsState {
   pets: PetsInformation[];
 }
 
+export interface PetsPostData {
+  condition: PetsCondition;
+  type: PetsType;
+  imgSrc: string;
+  description: string;
+  lat: number,
+  lng: number;
+}
+
 export interface PetsInformation {
-  id: string;
+  id?: string;
   type: PetsType;
   lat: number;
   lng: number;
@@ -12,6 +21,7 @@ export interface PetsInformation {
   description: string;
   imgSrc?: string;
   address: string;
+  user_id: string;
 }
 
 export enum PetsType {
