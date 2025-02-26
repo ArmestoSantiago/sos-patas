@@ -17,6 +17,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-loader-spinner": "^6.1.6",
+    "sos-image-classification": "^1.0.15",
     "use-places-autocomplete": "4.0.1",
     "zustand": "5.0.0-rc.2"
   },
