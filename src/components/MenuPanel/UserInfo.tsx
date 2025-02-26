@@ -1,5 +1,5 @@
-import { useUserStore } from '../../stores/users';
-import { GoogleLoginButton } from '../buttons/GoogleLoginButton/GoogleLoginButton';
+import { useUserStore } from '@stores/users';
+import { GoogleLoginButton } from '@components/buttons/GoogleLoginButton/GoogleLoginButton';
 
 export function UserInfo() {
   const userInfo = useUserStore(state => state.userInfo);
