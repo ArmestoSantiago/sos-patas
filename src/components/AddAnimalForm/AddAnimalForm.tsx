@@ -10,10 +10,11 @@ import { CloseIcon, SuccessIcon, UnsuccesIcon } from '@/icons/PageIcons';
 import { TailSpin } from 'react-loader-spinner';
 
 export function AddAnimalForm({ lat, lng }: AddAnimalFormProps) {
+  const [image, setImage] = useState<undefined | string>(undefined);
+  const selectFileRef = useRef<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [posted, setPosted] = useState<false | PostedStatus>(false);
   const texts = useTextsStore(state => state.texts.addAnimalsForm);
-  console.log(texts.pageTexts);
   const setOpenForm = useLocationStore(state => state.setOpenForm);
   const user = useUserStore(state => state.userInfo);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -22,8 +23,23 @@ export function AddAnimalForm({ lat, lng }: AddAnimalFormProps) {
     fileInputRef.current?.click();
   };
 
+  const handleImgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setImage(imageUrl);
+      selectFileRef.current = file;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // if image is not selected return 
+    if (!selectFileRef.current) {
+      setPosted({ code: 400, posted: false });
+      return;
+    }
     setLoading(true);
     const mappedData = mapData(e);
     const data = {
@@ -31,7 +47,9 @@ export function AddAnimalForm({ lat, lng }: AddAnimalFormProps) {
       lat, lng
     };
 
-    const result: PostedStatus = await postAnimal({ data, user });
+    const image = selectFileRef.current;
+
+    const result: PostedStatus = await postAnimal({ data, user, image });
     setLoading(false);
     setPosted(result);
     if (result.posted) {
@@ -44,7 +62,7 @@ export function AddAnimalForm({ lat, lng }: AddAnimalFormProps) {
   return (
     <div className='add-animals_container'>
       <div className='close-button-container'>
-        <button><CloseIcon /></button>
+        <button onClick={setOpenForm}><CloseIcon /></button>
       </div>
       <div className='flex-column'>
         <h2 className='add-animals_header-text'>{texts.primaryMessage}💖</h2>
@@ -74,11 +92,14 @@ export function AddAnimalForm({ lat, lng }: AddAnimalFormProps) {
               name="petImg"
               type='file'
               className='file-input'
+              onChange={handleImgUpload}
               ref={fileInputRef}
             />
-            <button type='button' className='upload-img_button' onClick={handleChargeFile}>
-              +
-              <p>{texts.pageTexts.upload}</p>
+            <button type='button' disabled={typeof image === 'string'} className='upload-img_button' onClick={handleChargeFile} style={image ? { backgroundImage: `url(${image})`, backgroundPosition: 'center', backgroundSize: 'cover', border: 'none' } : {}} >
+              {!image && <>
+                +
+                <p>{texts.pageTexts.upload}</p>
+              </>}
             </button>
           </div>
           {!loading && !posted && (<div className='form-field'>
