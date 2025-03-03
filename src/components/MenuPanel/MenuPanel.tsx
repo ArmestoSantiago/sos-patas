@@ -9,6 +9,7 @@ import { InputField } from './SearchInput';
 import { ChangeLanguageButton } from '@components/buttons/ChangeLanguageButton/ChangeLanguageButton';
 import { UserInfo } from './UserInfo';
 import { useTextsStore } from '@stores/texts';
+import { petsPostedLocal } from '@/const/const';
 
 export function MenuPanel() {
 
@@ -18,6 +19,7 @@ export function MenuPanel() {
   const [filter, setFilter] = useState<false | PetsType>(false);
   const texts = useTextsStore(state => state.texts.menuPanel);
   const pets = usePetsStore(state => state.pets);
+  const petsToRender = pets.concat(petsPostedLocal);
 
   const handleAddAnimal = () => {
     setToAddAnimal(true);
@@ -30,8 +32,8 @@ export function MenuPanel() {
 
   const filteredPets = useMemo(() => {
     return filter
-      ? pets.filter(pet => pet.type === filter)
-      : pets;
+      ? petsToRender.filter(pet => pet.type === filter)
+      : petsToRender;
   }, [pets, filter]);
 
   const handleTranslate = () => {
