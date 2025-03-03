@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
 
-interface UsePhraseIntervalProps {
-  loadingPhrases: string[],
-  intervalTime: number;
-}
-
 export function usePhraseInterval({ loadingPhrases, intervalTime }: UsePhraseIntervalProps) {
   const [curentPhrase, setCurrentPhrase] = useState<number>(0);
   useEffect(() => {
@@ -20,4 +15,9 @@ export function usePhraseInterval({ loadingPhrases, intervalTime }: UsePhraseInt
   });
 
   return curentPhrase;
+}
+
+interface UsePhraseIntervalProps {
+  loadingPhrases: string[],
+  intervalTime: number;
 }

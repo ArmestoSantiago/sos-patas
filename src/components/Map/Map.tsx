@@ -7,11 +7,6 @@ import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-ma
 import { customTimeout } from '@utils/timeout';
 import { GOOGLE_MAPS_APIKEY } from '@/config';
 
-interface MapProps {
-  location: Location,
-  setLoading: (args: boolean) => void;
-}
-
 export function Map({ location, setLoading }: MapProps) {
   const draggable = useLocationStore(state => state.draggable);
   const toAddAnimal = useLocationStore(state => state.toAddAnimal);
@@ -69,3 +64,7 @@ export function Map({ location, setLoading }: MapProps) {
   );
 };
 
+interface MapProps {
+  location: Location,
+  setLoading: (args: boolean) => void;
+}

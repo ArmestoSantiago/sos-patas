@@ -1,13 +1,16 @@
 import { API_URL, SOSPATAS_API_KEY } from '@/config';
-import { PetsInformation, PetsPostData } from '@/types/petsTypes';
+import { PetsInformation, PetsPostData, PetsType } from '@/types/petsTypes.d';
 import { User } from '@/types/usersTypes.d';
 import { getAddress } from './getAddress';
 import { petsPostedLocal } from '@/const/const';
-interface PostAnimalParams {
-  data: PetsPostData;
-  user: null | User;
-}
-export const postAnimal = async ({ data, user }: PostAnimalParams) => {
+import { getPostedByUser } from './getPostedByUser';
+import { uploadImage } from './uploadImage';
+
+const dogExample = './dog-example.jpg';
+const catExample = './cat-example.jpg';
+
+export const postAnimal = async ({ data, user, image }: PostAnimalParams) => {
+
   const address: string = await getAddress({ lat: data.lat, lng: data.lng });
 
   if (!user) {
@@ -15,7 +18,8 @@ export const postAnimal = async ({ data, user }: PostAnimalParams) => {
       user_id: 'guest',
       id: crypto.randomUUID(),
       ...data,
-      address
+      address,
+      imgSrc: data.type === PetsType.DOG ? dogExample : catExample
     };
 
     const toPostDataGuest = petsPostedLocal.concat(toPostData);
@@ -24,10 +28,20 @@ export const postAnimal = async ({ data, user }: PostAnimalParams) => {
   }
 
   try {
+    const postedByUser: PetsInformation[] = await getPostedByUser(user.id);
+
+    if (postedByUser.length >= 3) {
+      throw ({ code: 429, posted: false });
+    }
+
+    const blob = new Blob([image]);
+    const imageURL = await uploadImage(blob);
+
     const toPostData: PetsInformation = {
       ...data,
       user_id: user.id,
-      address
+      address,
+      imgSrc: imageURL
     };
 
     const response = await fetch(`${API_URL}/animals`, {
@@ -53,3 +67,8 @@ export const postAnimal = async ({ data, user }: PostAnimalParams) => {
   }
 
 };
+interface PostAnimalParams {
+  data: PetsPostData;
+  user: null | User;
+  image: File;
+}

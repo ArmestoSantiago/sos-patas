@@ -3,11 +3,6 @@ import { useTextsStore } from '@stores/texts';
 import { useUserStore } from '@stores/users';
 import './GoogleLoginButton.css';
 
-interface GoogleLoginButtonProps {
-  extraAction?: () => void;
-  method: boolean;
-}
-
 export function GoogleLoginButton({ extraAction, method }: GoogleLoginButtonProps) {
   const texts = useTextsStore(state => state.texts.googleButtons);
   const userLogIn = useUserStore(state => state.userLogIn);
@@ -32,4 +27,9 @@ export function GoogleLoginButton({ extraAction, method }: GoogleLoginButtonProp
     </button>
   );
 
+}
+
+interface GoogleLoginButtonProps {
+  extraAction?: () => void;
+  method: boolean;
 }

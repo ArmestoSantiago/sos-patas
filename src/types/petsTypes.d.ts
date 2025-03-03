@@ -6,7 +6,6 @@ export interface PetsState {
 export interface PetsPostData {
   condition: PetsCondition;
   type: PetsType;
-  imgSrc: string;
   description: string;
   lat: number,
   lng: number;
