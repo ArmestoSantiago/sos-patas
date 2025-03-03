@@ -1,22 +1,21 @@
 import { useTextsStore } from '@stores/texts';
 import { PetsState } from '@/types/petsTypes.d';
 import { listContainerTextsGenerator } from '@utils/listContainerTextsGenerator';
-import { petsPostedLocal } from '@/const/const';
 
 export function ListContainer({ pets }: PetsState) {
   const texts = useTextsStore(state => state.texts.menuPanel);
-  const petsToRender = pets.concat(petsPostedLocal);
 
   return (
     <main className='list-container'>
-      {petsToRender.map(pet => {
+      {pets.map(pet => {
 
         const {
           petTypeText,
           petTypeIcon,
           petConditionText,
           petConditionIcon,
-          petDescriptionIcon
+          petDescriptionIcon,
+          petLocationIcon
         } = listContainerTextsGenerator(pet, texts);
 
         return (
@@ -24,7 +23,7 @@ export function ListContainer({ pets }: PetsState) {
             <div className='pet-container'>
               <img
                 className='pet-thumbnail'
-                src="./perro.jpg"
+                src={pet.imgSrc}
                 alt="Pet Photo" />
               <div>
                 <div className='pet-text'>
@@ -38,6 +37,10 @@ export function ListContainer({ pets }: PetsState) {
                 <div className='pet-text'>
                   <p className='pet-icon'>{petDescriptionIcon}</p>
                   {pet.description}
+                </div>
+                <div className='pet-text'>
+                  <p className='pet-icon'>{petLocationIcon}</p>
+                  {pet.address}
                 </div>
               </div>
             </div>
