@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     fetchLocation();
-  });
+  }, []);
 
   return (
     <main className='main-page'>
