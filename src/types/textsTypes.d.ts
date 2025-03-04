@@ -19,7 +19,6 @@ export interface Root {
 }
 
 export interface AddAnimalsForm {
-  type: string;
   primaryMessage: string;
   petType: PetType;
   petCondition: PetCondition;

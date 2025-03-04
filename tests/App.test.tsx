@@ -1,4 +1,4 @@
-import { expect, describe, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { ListContainer } from '../src/components/MenuPanel/ListContainer';
 import { render, screen } from '@testing-library/react';
 import React from 'react';

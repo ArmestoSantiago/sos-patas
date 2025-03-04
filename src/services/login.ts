@@ -12,7 +12,7 @@ export const firebaseConfig = {
   appId
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
@@ -20,7 +20,7 @@ export const signOutFn = async () => {
   return signOut(auth).then(() => {
     // Sign-out successful.
     console.log('Saliste');
-  }).catch((error) => {
+  }).catch(() => {
     // An error happened.
     console.log('De acá no sale nadie');
   });

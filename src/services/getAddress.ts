@@ -11,5 +11,5 @@ export const getAddress = async ({ lat, lng }: Location) => {
       const formateAddress = addressInfo.results[0].formatted_address.split(',')[0];
       return formateAddress;
     })
-    .catch(err => 'Not found');
+    .catch(() => 'Not found');
 };

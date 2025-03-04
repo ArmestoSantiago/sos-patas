@@ -3,9 +3,10 @@ import { useLocationStore } from '@stores/location';
 import { RenderMarkers } from './Markers';
 import { Location } from '@/types/locationTypes';
 import { MAP_CONFIGURATION } from '@/const/const';
-import { APIProvider, Map as GoogleMap, MapEvent } from '@vis.gl/react-google-maps';
+import { APIProvider, Map as GoogleMap, MapEvent, MapMouseEvent } from '@vis.gl/react-google-maps';
 import { customTimeout } from '@utils/timeout';
 import { GOOGLE_MAPS_APIKEY } from '@/config';
+import { useEffect } from 'react';
 
 export function Map({ location, setLoading }: MapProps) {
   const draggable = useLocationStore(state => state.draggable);
@@ -16,18 +17,26 @@ export function Map({ location, setLoading }: MapProps) {
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);
   const pets = usePetsStore(state => state.pets);
+  const fetchPets = usePetsStore(state => state.fetchPets);
+
+  useEffect(() => {
+    fetchPets();
+  }, []);
 
   document.addEventListener('keydown', (e: KeyboardEvent) => {
     if (toAddAnimal || e.key === 'Escape') setToAddAnimal(false);
   });
 
-  const handleAddAnimal = (map: MapEvent) => {
+  const handleAddAnimal = (map: MapMouseEvent) => {
     // Change cursor style to crosshair so user can select location where to add pet on list. 
     // Then change locationNewAnimal state to the location user selected
+
     if (!toAddAnimal) return;
-    const { lat, lng } = map.detail.latLng;
-    setLocationNewAnimal(lat, lng);
-    setOpenForm();
+    if (map.detail.latLng) {
+      const { lat, lng } = map.detail.latLng;
+      setLocationNewAnimal(lat, lng);
+      setOpenForm();
+    }
   };
 
   const handleDragStart = () => {
@@ -58,7 +67,7 @@ export function Map({ location, setLoading }: MapProps) {
         onClick={(map) => handleAddAnimal(map)}
         draggableCursor={toAddAnimal ? 'crosshair' : ''}
       >
-        <RenderMarkers pets={pets}></RenderMarkers>
+        {<RenderMarkers pets={pets}></RenderMarkers>}
       </GoogleMap>
     </APIProvider>
   );

@@ -1,4 +1,9 @@
 //                                             Pet Types
+export interface PetsStateStore {
+  pets: PetsInformation[];
+  fetchPets: () => void;
+}
+
 export interface PetsState {
   pets: PetsInformation[];
 }

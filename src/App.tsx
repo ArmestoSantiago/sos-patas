@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocationStore } from '@/stores/location.ts';
 
 import { Map } from '@/components/Map/Map';
@@ -11,11 +11,16 @@ import '@/App.css';
 
 function App() {
   const location = useLocationStore(state => state.location);
+  const fetchLocation = useLocationStore(state => state.fetchLocation);
   const locationNewAnimal = useLocationStore(state => state.locationNewAnimal);
   const openForm = useLocationStore(state => state.openForm);
   const [loading, setLoading] = useState<boolean>(true);
   const firstTimeValue = window.localStorage.getItem('first');
   const firstTime = firstTimeValue ? JSON.parse(firstTimeValue) : false;
+
+  useEffect(() => {
+    fetchLocation();
+  });
 
   return (
     <main className='main-page'>

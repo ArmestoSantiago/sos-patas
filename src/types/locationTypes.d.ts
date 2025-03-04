@@ -10,6 +10,7 @@ export interface LocationState extends MapType {
   newLocation: (lat: number, lng: numner) => void;
   resetLocation: () => void;
   setDraggable: () => void;
+  fetchLocation: () => void;
 }
 
 export interface MapType {
