@@ -8,7 +8,7 @@ export interface LocationState extends MapType {
   setLocationNewAnimal: (lat, lng) => void;
   setToAddAnimal: (type: boolean) => void;
   newLocation: (lat: number, lng: numner) => void;
-  resetLocation: () => void;
+  resetLocation: (lat: number, lng: number) => void;
   setDraggable: () => void;
   fetchLocation: () => void;
 }

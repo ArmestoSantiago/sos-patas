@@ -10,6 +10,7 @@ import { ChangeLanguageButton } from '@components/buttons/ChangeLanguageButton/C
 import { UserInfo } from './UserInfo';
 import { useTextsStore } from '@stores/texts';
 import { petsPostedLocal } from '@/const/const';
+import { getLocation } from '@/services/getLocation';
 
 export function MenuPanel() {
 
@@ -40,12 +41,17 @@ export function MenuPanel() {
     setTranslate(!translate);
   };
 
+  const handleResetLocation = async () => {
+    const location = await getLocation();
+    resetLocation(location.lat, location.lng);
+  };
+
   return (
     <>
       <ChangeLanguageButton />
       <div className={`buttons_add_relocate-container ${translate && 'buttons_add_relocate-container-translate'}`}>
         <button
-          onClick={resetLocation}
+          onClick={handleResetLocation}
           className='btn btn-relocate'>
           <ResetLocationIcon />
         </button>

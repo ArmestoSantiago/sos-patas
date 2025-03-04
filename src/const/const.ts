@@ -1,6 +1,7 @@
 import { GOOGLE_MAPS_ID } from '@/config';
+import { Location } from '@/types/locationTypes.d';
 
-export const CONST = {
+export const CONST: CONST = {
   defaultLocation: { lat: -33.860664, lng: 151.208138 }  // default map position 
 };
 
@@ -14,3 +15,7 @@ export const MAP_CONFIGURATION = {
 
 const petsPostedLocalValue = window.localStorage.getItem('animalList');
 export const petsPostedLocal = petsPostedLocalValue ? JSON.parse(petsPostedLocalValue) : [];
+
+interface CONST {
+  defaultLocation: Location;
+}

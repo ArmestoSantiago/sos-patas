@@ -1,11 +1,12 @@
 import { create } from 'zustand';
-import { LocationState, MapType } from '@/types/locationTypes.d';
+import { LocationState } from '@/types/locationTypes.d';
 import { getLocation } from '@services/getLocation';
 import { CONST } from '@/const/const';
 
 export const useLocationStore = create<LocationState>((set, get) => {
   return {
     location: CONST.defaultLocation,
+    initialLocation: {},
     draggable: false,
     toAddAnimal: false,
     locationNewAnimal: undefined,
@@ -24,13 +25,13 @@ export const useLocationStore = create<LocationState>((set, get) => {
     setToAddAnimal: (type) => {
       set({ toAddAnimal: type });
     },
-    newLocation: (lat: number, lng: number) => set({ location: { lat: lat, lng: lng } }),
+    newLocation: (lat: number, lng: number) => set({ location: { lat, lng } }),
     setDraggable: () => {
       const isDraggable = get().draggable;
       if (isDraggable) set({ draggable: false });
       if (!isDraggable) set({ draggable: true });
     },
 
-    resetLocation: () => set(initialState)
+    resetLocation: (lat: number, lng: number) => set({ location: { lat, lng } })
   };
 });
