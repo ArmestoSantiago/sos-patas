@@ -3,6 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { FIREBASE_APIKEY as apiKey, FIREBASE_APP_ID as appId, FIREBASE_AUTH_DOMAIN as authDomain, FIREBASE_MESSAGIN_SENDER_ID as messagingSenderId, FIREBASE_PROJECT_ID as projectId, FIREBASE_STORAGE_BUCKET as storageBucket } from '@/config';
 
+console.log(apiKey);
 export const firebaseConfig = {
   apiKey,
   authDomain,
