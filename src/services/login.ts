@@ -12,7 +12,7 @@ export const firebaseConfig = {
   appId
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
