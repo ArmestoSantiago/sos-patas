@@ -4,7 +4,7 @@ import { getAnimalsList } from '@services/getAnimalsList';
 
 export const usePetsStore = create<PetsStateStore>((set) => {
   return {
-    pets: [], // Estado inicial vacío
+    pets: [],
     fetchPets: async () => {
       const pets = await getAnimalsList();
       set({ pets });

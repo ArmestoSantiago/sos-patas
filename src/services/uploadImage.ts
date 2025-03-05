@@ -12,7 +12,7 @@ export const uploadImage = async (file: Blob) => {
 
   const data: CloudinaryUploadResponse = await response.json();
 
-  return data.url;
+  return data.secure_url;
 
 };
 
