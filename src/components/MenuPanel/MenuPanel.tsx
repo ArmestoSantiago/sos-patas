@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { AddIcon, CatIcon, DogIcon, ResetLocationIcon } from '@icons/PageIcons';
+import { AddIcon, CatIcon, DogIcon, DownArrow, ResetLocationIcon, UpArrow } from '@icons/PageIcons';
 import { useLocationStore } from '@stores/location';
 import { usePetsStore } from '@stores/pets';
 import './MenuPanel.css';
@@ -59,7 +59,7 @@ export function MenuPanel() {
       </div>
       <section className={`menu-container ${translate && 'menu-container-translate'}`}>
         <button onClick={handleTranslate} className='menu-toggler'>
-          <div className='line-button'></div>
+          {translate ? <UpArrow /> : <DownArrow />}
         </button>
         <InputField />
         <div className='filter-container'>

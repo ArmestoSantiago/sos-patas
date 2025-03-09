@@ -324,6 +324,10 @@
   .options-container {
     width: 36rem;
   }
+
+  .menu-toggler {
+    transform: rotate(90deg);
+  }
   /* //////// */
 }
 
