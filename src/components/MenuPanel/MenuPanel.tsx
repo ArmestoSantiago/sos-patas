@@ -41,6 +41,10 @@ export function MenuPanel() {
     setTranslate(!translate);
   };
 
+  const translateTrue = () => {
+    setTranslate(false);
+  };
+
   const handleResetLocation = async () => {
     const location = await getLocation();
     resetLocation(location.lat, location.lng);
@@ -61,7 +65,7 @@ export function MenuPanel() {
         <button onClick={handleTranslate} className='menu-toggler'>
           {translate ? <UpArrow /> : <DownArrow />}
         </button>
-        <InputField />
+        <InputField translate={translateTrue} />
         <div className='filter-container'>
           <button
             className='filter-button'

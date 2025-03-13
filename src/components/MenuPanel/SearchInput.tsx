@@ -6,13 +6,12 @@ import { Location } from '@/types/geocodeTypes.d';
 import { ThreeDots } from 'react-loader-spinner';
 import { LocationIcon } from '@icons/PageIcons';
 
-export function InputField() {
+export function InputField({ translate }: InputFieldProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [optionsOpen, setOptionsOpen] = useState<boolean>(false);
   const [locations, setLocations] = useState<string[]>([]);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
   const newLocation = useLocationStore(state => state.newLocation);
-
   const handleClear = () => {
     const input = document.querySelector('.location-input') as HTMLInputElement;
     input.value = '';
@@ -70,6 +69,7 @@ export function InputField() {
         <input
           id="autocomplete"
           className={`location-input ${optionsOpen && 'open-options'}`}
+          onClick={translate}
           onChange={(e) => { handleUserSearch(e); }}
           placeholder='Buenos Aires, Cordoba...'>
         </input>
@@ -118,3 +118,7 @@ export function InputField() {
     </>
   );
 };
+
+interface InputFieldProps {
+  translate: () => void;
+}
