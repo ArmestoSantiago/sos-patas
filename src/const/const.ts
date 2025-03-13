@@ -2,7 +2,7 @@ import { GOOGLE_MAPS_ID } from '@/config';
 import { Location } from '@/types/locationTypes.d';
 
 export const CONST: CONST = {
-  defaultLocation: { lat: -33.860664, lng: 151.208138 }  // default map position 
+  defaultLocation: { lat: -33.75, lng: -61.966 }  // default map position 
 };
 
 export const MAP_CONFIGURATION = {
