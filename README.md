@@ -9,7 +9,7 @@ S.O.S Patas es un sitio web con la propósito de ayudar a ayudarlos. Creemos que
 
 [S.O.S Patas | Página Oficial](https://sospatas.com)
 
-### Capturas
+### 📸 Capturas
 
 <img width="600px" src="public/sospatasscreendesktop.png" alt="Logo" width="800" />
 <img width="600px" src="public/sospatasscreenmobile.png" alt="Logo" width="800" />
