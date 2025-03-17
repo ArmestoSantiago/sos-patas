@@ -14,5 +14,15 @@ S.O.S Patas es un sitio web con la propósito de ayudar a ayudarlos. Creemos que
 <img width="600px" src="public/sospatasscreendesktop.png" alt="Logo" width="800" />
 <img width="600px" src="public/sospatasscreenmobile.png" alt="Logo" width="800" />
 
+## 🚀 Stack Tecnológico
+
+S.O.S Patas está desarrollado con las siguientes tecnologías:
+
+- **Frontend:** [React](https://react.dev/) con [Vite](https://vitejs.dev/)  
+- **Estilos:** CSS Modules  
+- **Pruebas:** [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/), [Happy DOM](https://happy-dom.js.org/)  
+- **Backend:** API alojada en [Render](https://render.com/)  
+- **Base de datos y autenticación:** Firebase  
+- **Mapas:** Google Maps API  
 
 </div>
