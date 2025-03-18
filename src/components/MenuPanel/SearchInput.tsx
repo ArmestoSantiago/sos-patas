@@ -12,11 +12,13 @@ export function InputField({ translate }: InputFieldProps) {
   const [locations, setLocations] = useState<string[]>([]);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
   const newLocation = useLocationStore(state => state.newLocation);
+
   const handleClear = () => {
     const input = document.querySelector('.location-input') as HTMLInputElement;
     input.value = '';
     setLocations([]);
     setOptionsOpen(false);
+    setLoading(false);
   };
 
   const handleUserSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +30,11 @@ export function InputField({ translate }: InputFieldProps) {
 
     debounceTimeout.current = setTimeout(async () => {
       const predictions = await getLocationPrediction(e.target.value);
-      const predictionsArray = predictions.map((prediction: { description: string; }) => prediction.description);
+      const predictionsArray = predictions.map((prediction: { description: string; }) => {
+        const formattedPrediction = prediction.description.split(',').splice(0, 2).join(',');
+
+        return formattedPrediction;
+      });
       setLocations(predictionsArray);
       setLoading(false);
     }, 500);
