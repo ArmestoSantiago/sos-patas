@@ -181,7 +181,7 @@
 
 .buttons_add_relocate-container {
   position: fixed;
-  bottom: 65%;
+  bottom: 70%;
   right: 5%;
   transition: all 0.3s ease;
 }
