@@ -64,8 +64,10 @@
       "photoSpanText": "Photo",
       "postedText": "Animal Posted!",
       "publicationsError": "Too many publication for this user",
-      "validationError": "Error: Complete fields with valid information",
-      "keke": "keke"
+      "validationError": "Error: Complete fields with valid information"
     }
+  },
+  "searchInput": {
+    "error": "Error: We are working on it"
   }
 }

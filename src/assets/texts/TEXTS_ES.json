@@ -66,5 +66,8 @@
       "publicationsError": "Demasiados publicaciones para este usuario",
       "validationError": "Error: Rellene los campos con información valida"
     }
+  },
+  "searchInput": {
+    "error": "Error: Estamos trabajando en eso"
   }
 }
