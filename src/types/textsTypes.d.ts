@@ -15,7 +15,11 @@ export interface Root {
   menuPanel: MenuPanel;
   googleButtons: GoogleButtons;
   addAnimalsForm: AddAnimalsForm;
+  searchInput: SearchInput;
+}
 
+interface SearchInput {
+  error: string;
 }
 
 export interface AddAnimalsForm {
