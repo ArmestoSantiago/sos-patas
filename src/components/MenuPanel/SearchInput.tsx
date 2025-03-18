@@ -5,6 +5,7 @@ import { useLocationStore } from '@stores/location';
 import { Location } from '@/types/geocodeTypes.d';
 import { ThreeDots } from 'react-loader-spinner';
 import { LocationIcon } from '@icons/PageIcons';
+import { useTextsStore } from '@/stores/texts';
 
 export function InputField({ translate }: InputFieldProps) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -12,6 +13,7 @@ export function InputField({ translate }: InputFieldProps) {
   const [locations, setLocations] = useState<string[]>([]);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
   const newLocation = useLocationStore(state => state.newLocation);
+  const texts = useTextsStore(state => state.texts);
 
   const handleClear = () => {
     const input = document.querySelector('.location-input') as HTMLInputElement;
@@ -30,6 +32,12 @@ export function InputField({ translate }: InputFieldProps) {
 
     debounceTimeout.current = setTimeout(async () => {
       const predictions = await getLocationPrediction(e.target.value);
+      if (!predictions) {
+        setLoading(false);
+        const notFoundArray = Array(3).fill(texts.searchInput.error);
+        setLocations(notFoundArray);
+        return;
+      }
       const predictionsArray = predictions.map((prediction: { description: string; }) => {
         const formattedPrediction = prediction.description.split(',').splice(0, 2).join(',');
 
