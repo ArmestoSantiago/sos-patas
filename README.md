@@ -22,7 +22,8 @@ S.O.S Patas está desarrollado con las siguientes tecnologías:
 - **Estilos:** CSS Modules  
 - **Pruebas:** [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/), [Happy DOM](https://happy-dom.js.org/)  
 - **Backend:** API alojada en [Render](https://render.com/)  
-- **Base de datos y autenticación:** Firebase  
+- **Base de datos:** Turso
+- **Autenticación:** Firebase  
 - **Mapas:** Google Maps API  
 
 </div>
