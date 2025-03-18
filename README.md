@@ -11,8 +11,8 @@ S.O.S Patas es un sitio web con la propósito de ayudar a ayudarlos. Creemos que
 
 ### 📸 Capturas
 
-<img width="600px" src="sospatasscreendesktop.png" alt="Screen desktop" width="800" />
-<img width="600px" src="sospatasscreenmobile.png" alt="Screen mobile" width="800" />
+<img width="600px" src="public/sospatasscreendesktop.png" alt="Screen desktop" width="800" />
+<img width="600px" src="public/sospatasscreenmobile.png" alt="Screen mobile" width="800" />
 
 ## 🚀 Stack Tecnológico
 
