@@ -30,10 +30,10 @@ S.O.S Patas está desarrollado con las siguientes tecnologías:
 
 ## 🚀 Futuras Implementaciones
 
-S.O.S Patas es un proyecto ambicioso que está en constante desarrollo para satisfacer las necesidades de los usuarios. Alguno de los próximos agregados son: 
+S.O.S Patas es un proyecto que está en constante desarrollo para satisfacer las necesidades de los usuarios. Algunos de los próximos agregados son: 
 <div align="start">
   
-- **Clasificación de imagenes** para no recibir fotos no deseadas (Actualmente en desarrollo: [Repositorio](https://github.com/ArmestoSantiago/image-classification) | [NPM](https://www.npmjs.com/package/sos-image-classification?activeTab=readme)
+- **Clasificación de imagenes** para no recibir fotos no deseadas (Actualmente en desarrollo: [Repositorio](https://github.com/ArmestoSantiago/image-classification) | [NPM](https://www.npmjs.com/package/sos-image-classification?activeTab=readme))
 - **Chat en tiempo real** para que los usuarios interactúen entre si y pensar S.O.S Patas como una red social. 
 - **Mejoras en UX y estilos** 
 - **Ranking y Estadísticas por países**
