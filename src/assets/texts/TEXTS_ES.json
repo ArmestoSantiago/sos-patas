@@ -15,7 +15,7 @@
     },
     "instructions3": {
       "header": "Eso es todo!",
-      "description": "Para continuar elige conectarte con tu cuenta de Google o seguir como invitado. Si continuas como invitado todos los animales que agregues solo podran ser vistos por vos"
+      "description": "Para continuar elige conectarte con tu cuenta de Google o seguir como invitado. Si continuas como invitado todos los animales que agregues solo podran ser vistos por vos y las fotos de estos se generaran por defecto"
     },
     "buttons": {
       "guest": "Continuar como invitado",
