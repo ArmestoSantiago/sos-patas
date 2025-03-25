@@ -20,7 +20,7 @@ export function FirstTimeInstruction() {
     setActualGuideIndex(prevState => prevState + 1);
   };
 
-  if (actualGuideIndex === -1) return;
+  if (actualGuideIndex === -1) return null;
 
   return (
     <div className='instructions-container-list'>
