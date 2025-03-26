@@ -8,8 +8,10 @@ import { useUserStore } from '@stores/users';
 import { useLocationStore } from '@stores/location';
 import { CloseIcon, SuccessIcon, UnsuccesIcon } from '@/icons/PageIcons';
 import { TailSpin } from 'react-loader-spinner';
+import { usePetsStore } from '@/stores/pets';
 
 export function AddAnimalForm({ lat, lng }: AddAnimalFormProps) {
+  const fetchPets = usePetsStore(state => state.fetchPets);
   const [image, setImage] = useState<undefined | string>(undefined);
   const selectFileRef = useRef<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,11 +54,13 @@ export function AddAnimalForm({ lat, lng }: AddAnimalFormProps) {
     const result: PostedStatus = await postAnimal({ data, user, image });
     setLoading(false);
     setPosted(result);
+    fetchPets();
     if (result.posted) {
       setTimeout(() => {
         setOpenForm();
       }, 2000);
     }
+
   };
 
   return (
