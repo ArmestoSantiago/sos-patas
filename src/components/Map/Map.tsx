@@ -65,6 +65,7 @@ export function Map({ location, setLoading }: MapProps) {
         onDragstart={handleDragStart}
         onDragend={(map) => handleDragEnd(map)}
         onClick={(map) => handleAddAnimal(map)}
+        onZoomChanged={() => console.log('ZOOM')}
         draggableCursor={toAddAnimal ? 'crosshair' : ''}
       >
         {<RenderMarkers pets={pets}></RenderMarkers>}

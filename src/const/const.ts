@@ -7,7 +7,8 @@ export const CONST: CONST = {
 
 export const MAP_CONFIGURATION = {
   mapId: GOOGLE_MAPS_ID,
-  zoom: 15,
+  defaultZoom: 15,
+  maxZoom: 17,
   disableDefaultUI: true,
   draggable: true,
   clickableIcons: false,
