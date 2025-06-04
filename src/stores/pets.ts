@@ -4,10 +4,13 @@ import { getAnimalsList } from '@services/getAnimalsList';
 
 export const usePetsStore = create<PetsStateStore>((set) => {
   return {
+    loadingPets: false,
     pets: [],
     fetchPets: async () => {
+      set({ loadingPets: true });
       const pets = await getAnimalsList();
       set({ pets });
+      set({ loadingPets: false });
     },
   };
 });

@@ -6,11 +6,16 @@ import { MenuPanel } from '@/components/MenuPanel/MenuPanel';
 import { LoadingComponent } from '@/components/Loading/LoadingComponent';
 import { FirstTimeInstruction } from '@/components/FirstTimeInstructions/FirstTimeInstructions';
 import { AddAnimalForm } from '@/components/AddAnimalForm/AddAnimalForm';
+import { usePetsStore } from './stores/pets';
 
 import '@/App.css';
+import { useTextsStore } from './stores/texts';
+import { ColorRing } from 'react-loader-spinner';
 
 function App() {
+  const texts = useTextsStore(state => state.texts);
   const location = useLocationStore(state => state.location);
+  const loadingPets = usePetsStore(state => state.loadingPets);
   const fetchLocation = useLocationStore(state => state.fetchLocation);
   const locationNewAnimal = useLocationStore(state => state.locationNewAnimal);
   const openForm = useLocationStore(state => state.openForm);
@@ -35,6 +40,15 @@ function App() {
       >
       </Map>
       {!loading && <MenuPanel />}
+      {loadingPets && !loading && (
+        <div className='loading-window'>
+          <p >{texts.loadingPets}</p>
+          <ColorRing
+            width="60"
+            height="60"
+          />;
+        </div>
+      )}
     </main>
   );
 }
