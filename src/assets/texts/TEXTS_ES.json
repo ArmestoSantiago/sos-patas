@@ -1,5 +1,6 @@
 {
   "lang": "ES",
+  "loadingPets": "Cargando mascotas buscando hogar...",
   "instructions": {
     "instructions0": {
       "header": "Bienvenidos",

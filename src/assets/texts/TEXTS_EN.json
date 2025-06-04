@@ -1,5 +1,6 @@
 { 
   "lang": "EN",
+  "loadingPets": "Loading pets looking for a home...",
   "instructions": {
     "instructions0": {
       "header": "Welcome",
