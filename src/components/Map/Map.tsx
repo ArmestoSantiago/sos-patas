@@ -17,7 +17,6 @@ export function Map({ location, setLoading }: MapProps) {
   const setDraggable = useLocationStore(state => state.setDraggable);
   const newLocation = useLocationStore(state => state.newLocation);
   const pets = usePetsStore(state => state.pets);
-  const loadingPets = usePetsStore(state => state.loadingPets);
   const fetchPets = usePetsStore(state => state.fetchPets);
 
   useEffect(() => {
