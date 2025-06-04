@@ -1,5 +1,6 @@
 //                                             Pet Types
 export interface PetsStateStore {
+  loadingPets: boolean;
   pets: PetsInformation[];
   fetchPets: () => void;
 }

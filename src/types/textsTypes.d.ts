@@ -10,6 +10,7 @@ export enum ValidLanguages {
 
 export interface Root {
   lang: string;
+  loadingPets: string;
   instructions: Instructions;
   loadingScreenText: LoadingScreenText;
   menuPanel: MenuPanel;
