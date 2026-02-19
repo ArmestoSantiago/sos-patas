@@ -19,6 +19,8 @@ export function Map({ location, setLoading }: MapProps) {
   const pets = usePetsStore(state => state.pets);
   const fetchPets = usePetsStore(state => state.fetchPets);
 
+  console.log('RENDER MAP');
+
   useEffect(() => {
     fetchPets();
   }, []);
@@ -69,7 +71,7 @@ export function Map({ location, setLoading }: MapProps) {
         draggableCursor={toAddAnimal ? 'crosshair' : ''}
       >
 
-        {<RenderMarkers pets={pets}></RenderMarkers>}
+        {/* {<RenderMarkers pets={pets}></RenderMarkers>} */}
       </GoogleMap>
     </APIProvider>
   );
