@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useLocationStore } from '@/stores/location.ts';
+import { Route, Routes } from 'react-router';
+import { Home } from '@/pages/Home';
+import { MapPage } from '@/pages/MapPage';
 
-import { Map } from '@/components/Map/Map';
 import { MenuPanel } from '@/components/MenuPanel/MenuPanel';
 import { LoadingComponent } from '@/components/Loading/LoadingComponent';
 import { FirstTimeInstruction } from '@/components/FirstTimeInstructions/FirstTimeInstructions';
@@ -11,6 +13,10 @@ import { usePetsStore } from './stores/pets';
 import '@/App.css';
 import { useTextsStore } from './stores/texts';
 import { ColorRing } from 'react-loader-spinner';
+import { Header } from './components/Header';
+import { Footer, NavMenu } from './components/NavMenu';
+import { AddForm } from './pages/Add';
+import { Map } from './components/Map/Map';
 
 function App() {
   const texts = useTextsStore(state => state.texts);
@@ -28,28 +34,14 @@ function App() {
   }, []);
 
   return (
-    <main className='main-page'>
-      {!firstTime && <FirstTimeInstruction />}
-      {loading && <LoadingComponent />}
-      {/* locationNewAnimal is used to send de coords where animal article will be render */}
-      {/* openForm render de form */}
-      {openForm && locationNewAnimal && <AddAnimalForm lat={locationNewAnimal.lat} lng={locationNewAnimal.lng} />}
-      <Map
-        location={location}
-        setLoading={setLoading}
-      >
-      </Map>
-      {!loading && <MenuPanel />}
-      {loadingPets && !loading && (
-        <div className='loading-window'>
-          <p >{texts.loadingPets}</p>
-          <ColorRing
-            width="60"
-            height="60"
-          />;
-        </div>
-      )}
-    </main>
+    <>
+      {/* <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path="/map" element={<MapPage />}></Route>
+        <Route path="/add" element={<AddForm />}></Route>
+      </Routes> */}
+      <Map location={location} setLoading={setLoading} />
+    </>
   );
 }
 

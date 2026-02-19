@@ -14,6 +14,7 @@ export const postAnimal = async ({ data, user, image }: PostAnimalParams) => {
   const address: string = await getAddress({ lat: data.lat, lng: data.lng });
 
   if (!user) {
+    // if there is no user the information will be asigned by default
     const toPostData: PetsInformation = {
       user_id: 'guest',
       id: crypto.randomUUID(),
