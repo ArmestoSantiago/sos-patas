@@ -59,21 +59,23 @@ export function Map({ location, setLoading }: MapProps) {
   };
 
   return (
-    <APIProvider apiKey={GOOGLE_MAPS_APIKEY} onLoad={() => customTimeout({ callback: setLoading, delay: 1000, args: false })}>
-      <GoogleMap
-        {...MAP_CONFIGURATION}
-        center={draggable ? undefined : location}
-        defaultCenter={draggable ? location : undefined}
-        onDragstart={handleDragStart}
-        onDragend={(map) => handleDragEnd(map)}
-        onClick={(map) => handleAddAnimal(map)}
-        onZoomChanged={() => console.log('ZOOM')}
-        draggableCursor={toAddAnimal ? 'crosshair' : ''}
-      >
+    <div style={{ height: '100vh', width: '100vw' }}>
+      <APIProvider apiKey={GOOGLE_MAPS_APIKEY} onLoad={() => customTimeout({ callback: setLoading, delay: 1000, args: false })}>
+        <GoogleMap
+          {...MAP_CONFIGURATION}
+          center={draggable ? undefined : location}
+          defaultCenter={draggable ? location : undefined}
+          onDragstart={handleDragStart}
+          onDragend={(map) => handleDragEnd(map)}
+          onClick={(map) => handleAddAnimal(map)}
+          onZoomChanged={() => console.log('ZOOM')}
+          draggableCursor={toAddAnimal ? 'crosshair' : ''}
+        >
 
-        {/* {<RenderMarkers pets={pets}></RenderMarkers>} */}
-      </GoogleMap>
-    </APIProvider>
+          {<RenderMarkers pets={pets}></RenderMarkers>}
+        </GoogleMap>
+      </APIProvider>
+    </div>
   );
 };
 
