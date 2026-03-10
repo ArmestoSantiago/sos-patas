@@ -35,12 +35,11 @@ function App() {
 
   return (
     <>
-      {/* <Routes>
+      <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path="/map" element={<MapPage />}></Route>
         <Route path="/add" element={<AddForm />}></Route>
-      </Routes> */}
-      <Map location={location} setLoading={setLoading} />
+      </Routes>
     </>
   );
 }
