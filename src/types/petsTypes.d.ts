@@ -31,7 +31,7 @@ export interface PetsInformation {
   situation: PetSituation;
 }
 
-export enum PetSituation {
+export enum PetsSituation {
   LOST = 'LOST',
   RESCUE = 'RESCUE',
   TRANSITION = 'TRANSITION',
