@@ -1,23 +1,21 @@
 import { Header } from '@/components/Header';
 import { NavMenu } from '@/components/NavMenu';
 import { Map } from '@/components/Map/Map';
-import { useLocationStore } from '@/stores/location';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Location } from '@/types/locationTypes';
 
-export function MapPage() {
-  const location = useLocationStore(state => state.location);
+export function MapPage({ userLocation }: MapPageProps) {
   const [loading, setLoading] = useState<boolean>(true);
-  const fetchLocation = useLocationStore(state => state.fetchLocation);
-
-  useEffect(() => {
-    fetchLocation();
-  }, []);
 
   return (
     <>
       <Header title="Mapa" />
-      <Map location={location} setLoading={setLoading} />
+      <Map userLocation={userLocation} setLoading={setLoading} />
       <NavMenu />
     </>
   );
+}
+
+interface MapPageProps {
+  userLocation: Location;
 }
