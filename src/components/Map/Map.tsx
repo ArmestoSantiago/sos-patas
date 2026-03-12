@@ -8,7 +8,7 @@ import { customTimeout } from '@utils/timeout';
 import { GOOGLE_MAPS_APIKEY } from '@/config';
 import { useEffect } from 'react';
 
-export function Map({ location, setLoading }: MapProps) {
+export function Map({ userLocation, setLoading }: MapProps) {
   const draggable = useLocationStore(state => state.draggable);
   const toAddAnimal = useLocationStore(state => state.toAddAnimal);
   const setToAddAnimal = useLocationStore(state => state.setToAddAnimal);
@@ -18,8 +18,6 @@ export function Map({ location, setLoading }: MapProps) {
   const newLocation = useLocationStore(state => state.newLocation);
   const pets = usePetsStore(state => state.pets);
   const fetchPets = usePetsStore(state => state.fetchPets);
-
-  console.log('RENDER MAP');
 
   useEffect(() => {
     fetchPets();
@@ -59,12 +57,12 @@ export function Map({ location, setLoading }: MapProps) {
   };
 
   return (
-    <div style={{ height: '100vh', width: '100vw' }}>
+    <div style={{ height: 'calc(100vh - 120px)', width: '100vw' }}>
       <APIProvider apiKey={GOOGLE_MAPS_APIKEY} onLoad={() => customTimeout({ callback: setLoading, delay: 1000, args: false })}>
         <GoogleMap
           {...MAP_CONFIGURATION}
-          center={draggable ? undefined : location}
-          defaultCenter={draggable ? location : undefined}
+          center={draggable ? undefined : userLocation}
+          defaultCenter={draggable ? userLocation : undefined}
           onDragstart={handleDragStart}
           onDragend={(map) => handleDragEnd(map)}
           onClick={(map) => handleAddAnimal(map)}
@@ -80,6 +78,6 @@ export function Map({ location, setLoading }: MapProps) {
 };
 
 interface MapProps {
-  location: Location,
+  userLocation: Location,
   setLoading: (args: boolean) => void;
 }

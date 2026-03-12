@@ -1,11 +1,22 @@
-import { PetsCondition, PetsInformation } from '@/types/petsTypes.d';
+import { PetsCondition, PetsInformation, PetsSituation } from '@/types/petsTypes.d';
 import { DistanceIcon, LocationIcon } from './Icons';
 import { useLocationStore } from '@/stores/location';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getDistance } from '@/utils/getDistance';
+import { getAllUser } from '@/services/getUsers';
+import { User } from '@/types/usersTypes';
 
 export function PublicationCard({ pets }: PublicationCardProps) {
   const { location } = useLocationStore();
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const users = await getAllUser();
+      setUsers(users);
+    };
+    getUsers();
+  }, []);
 
   const initialUserLocation = useMemo(() => location, []);
   return (
@@ -15,13 +26,15 @@ export function PublicationCard({ pets }: PublicationCardProps) {
         const distance = getDistance(pet.lat, pet.lng, initialUserLocation);
         const distanceText = distance > 999 ? '> 999 km' : `${distance.toFixed(1)} km`;
         const conditionText = getHealInfo(pet.condition);
+        const situationText = getHealInfo(pet.situation);
+        const publicationUserInfo = users.find(user => pet.user_id === user.id);
 
         return (
           <div key={pet.id} className='bg-white rounded-3xl overflow-hiden shadow-sm hover:shadow-md transition-all border border-stone-100 mb-4'>
             <div className='p-4 flex items-center gap-3'>
-              <img src="public/user-test.png" alt="User Image" className='w-10 h-10 rounded-full object-cover' />
+              <img loading="lazy" src={publicationUserInfo?.photoURL} onError={(e) => { e.currentTarget.src = 'user-test.png'; }} alt="User Image" className='w-10 h-10 rounded-full object-cover' />
               <div className="flex-1">
-                <h3 className="font-semibold text-sm text-[#2A2A2A]">Nombre del Usuario</h3>
+                <h3 className="font-semibold text-sm text-[#2A2A2A]">{publicationUserInfo?.name}</h3>
                 <div className='flex items-center text-xs text-stone-500 gap-1 mt-1'>
                   <LocationIcon size={14}></LocationIcon>
                   <span>{pet.address}</span>
@@ -32,9 +45,15 @@ export function PublicationCard({ pets }: PublicationCardProps) {
               <img src={pet.imgSrc} alt="pet-image" className='w-full h-full object-cover'></img>
             </div>
             <div className="p-4">
-              <h2 className="text-xl font-bold text-[#2A2A2A] mb-4 line-clamp-1">{
-                pet.name
-              }</h2>
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-bold text-[#2A2A2A] line-clamp-1">{
+                  pet.name
+                }</h2>
+                <div className={`flex text-sm rounded-full px-3 py-1 text-white font-semibold items-center gap-1 ${situationText.backGround}`}>
+                  <span>{situationText.icon}</span>
+                  <p>{situationText.text}</p>
+                </div>
+              </div>
               <p className="text-sm text-[#4A4A4A] mb-4 line-clamp-1">{pet.description}</p>
               <div className='flex items-center gap-3 mb-4'>
                 <div className="flex items-center gap-1.5 bg-stone-100 px-3 py-1.5 rounded-full">
@@ -60,7 +79,7 @@ interface PublicationCardProps {
   pets: PetsInformation[];
 }
 
-const healthStatus: Record<PetsCondition, { text: string; backGround: string; icon: string; }> = {
+const healthStatus: Record<PetsCondition | PetsSituation, { text: string; backGround: string; icon: string; }> = {
   [PetsCondition.HEALTHY]: {
     text: 'SANO',
     backGround: 'bg-[#22C55E]',
@@ -75,9 +94,29 @@ const healthStatus: Record<PetsCondition, { text: string; backGround: string; ic
     text: 'GRAVE',
     backGround: 'bg-[#EF4444]',
     icon: '🚑'
+  },
+  [PetsSituation.ADOPTION]: {
+    text: 'ADOPCIÓN',
+    backGround: 'bg-[#3B82F6]',
+    icon: '🏠'
+  },
+  [PetsSituation.LOST]: {
+    text: 'PERDIDO',
+    backGround: 'bg-[#6B7280]',
+    icon: '❓',
+  },
+  [PetsSituation.RESCUE]: {
+    text: 'RESCATE',
+    backGround: 'bg-[#F97316]',
+    icon: '🆘',
+  },
+  [PetsSituation.TRANSITION]: {
+    text: 'TRANSICIÓN',
+    backGround: 'bg-[#8B5CF6]',
+    icon: '🔄',
   }
 };
 
-const getHealInfo = (condition: PetsCondition) => {
+const getHealInfo = (condition: PetsCondition | PetsSituation) => {
   return healthStatus[condition] || null;
 };
