@@ -1,4 +1,4 @@
-import { HomeIcon, MapIcon, AddIcon, ChatIcon, ProfileIcon } from './NavIcons';
+import { HomeIcon, MapIcon, AddIcon, ChatIcon, ProfileIcon } from './Icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export function NavMenu() {
@@ -12,10 +12,9 @@ export function NavMenu() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
 
   return (
-    <div className="fixed bottom-0 border-t border-stone-200 h-30 w-full bg-white safe-area-bottom">
+    <div className="fixed bottom-0 border-t border-stone-200 h-20 w-full bg-white safe-area-bottom">
       <div className="flex items-center max-w-2xl mx-auto justify-center h-full">
         {navItems.map(item => {
           const isActive = location.pathname === item.path;
@@ -24,10 +23,10 @@ export function NavMenu() {
               key={item.label}
               data-testid={item.testId}
               onClick={() => navigate(item.path)}
-              className={`flex-1 flex flex-col items-center justify-center gap-2 py-2 pointer ${isActive ? 'stroke-main' : 'stroke-[#a8a29e]'}`}
+              className={`flex-1 flex flex-col items-center cursor-pointer justify-center gap-2 py-2 pointer ${isActive ? 'stroke-main' : 'stroke-[#a8a29e]'}`}
             >
               <item.icon color={isActive ? '#2e7d32' : '#a8a29e'} />
-              <span className={`text-1xl font-bold  ${isActive ? 'text-main' : 'text-[#a8a29e]'} `}>{item.label}</span>
+              <span className={`text-sm font-bold  ${isActive ? 'text-main' : 'text-[#a8a29e]'} `}>{item.label}</span>
             </button>
           );
         })}

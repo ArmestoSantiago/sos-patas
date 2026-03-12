@@ -18,7 +18,7 @@ export function AnimalForm({ onCancel, onSubmit }: AnimalFormProps) {
     <div className="pb-20 my-6 mx-4">
       <form>
         <div className="bg-white rounded-3xl border border-stone-100 p-6">
-          <label className="block text-sm font-semibold text-stone-700 mb-8">Foto del animal *</label>
+          <label className="block text-sm font-semibold text-stone-700 mb-4">Foto del animal *</label>
           <span>
             <label className="flex flex-col items-center justify-center h-64 gap-1 border-2 border-dashed border-stone-300 rounded-2xl cursor-pointer hover:border-[#4CAF50] hover:bg-stone-50 transition-all">
               <CamaraIcon />
@@ -78,7 +78,7 @@ export function AnimalForm({ onCancel, onSubmit }: AnimalFormProps) {
             </div>
             <div>
               <label className="block text-sm font-semibold text-stone-700 mt-8 mb-4">Descripción</label>
-              <textarea data-testid="description-input" className="w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all pt-3 px-4 min-h-30" placeholder="Cuentanos sobre este animalito"></textarea>
+              <textarea maxLength={120} data-testid="description-input" className="w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all pt-3 px-4 min-h-30" placeholder="Cuentanos sobre este animalito"></textarea>
             </div>
           </div>
         </div>
