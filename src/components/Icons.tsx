@@ -67,3 +67,9 @@ export const DistanceIcon = () => {
     </svg>
   );
 };
+
+export const SelectedLocationIcon = () => {
+  return (
+    <svg width="40" height="50" viewBox="0 0 40 50" fill="none" ><path d="M20 0C9 0 0 9 0 20C0 35 20 50 20 50C20 50 40 35 40 20C40 9 31 0 20 0Z" fill="#2E7D32" ></path><circle cx="20" cy="20" r="8" fill="white" ></circle></svg>
+  );
+};

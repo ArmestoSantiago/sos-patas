@@ -30,7 +30,7 @@ export function PublicationCard({ pets }: PublicationCardProps) {
         const publicationUserInfo = users.find(user => pet.user_id === user.id);
 
         return (
-          <div key={pet.id} className='bg-white rounded-3xl overflow-hiden shadow-sm hover:shadow-md transition-all border border-stone-100 mb-4'>
+          <div key={pet.id} className='bg-white rounded-3xl w-full overflow-hiden shadow-sm hover:shadow-md transition-all border border-stone-100 mb-4'>
             <div className='p-4 flex items-center gap-3'>
               <img loading="lazy" src={publicationUserInfo?.photoURL} onError={(e) => { e.currentTarget.src = 'user-test.png'; }} alt="User Image" className='w-10 h-10 rounded-full object-cover' />
               <div className="flex-1">
