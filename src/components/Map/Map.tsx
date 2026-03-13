@@ -1,48 +1,29 @@
-import { usePetsStore } from '@stores/pets';
 import { useLocationStore } from '@stores/location';
 import { RenderMarkers } from './Markers';
 import { Location } from '@/types/locationTypes';
 import { MAP_CONFIGURATION } from '@/const/const';
-import { APIProvider, Map as GoogleMap, MapEvent, MapMouseEvent } from '@vis.gl/react-google-maps';
+import { APIProvider, Map as GoogleMap, MapEvent, } from '@vis.gl/react-google-maps';
 import { customTimeout } from '@utils/timeout';
 import { GOOGLE_MAPS_APIKEY } from '@/config';
-import { useEffect } from 'react';
+import { useState } from 'react';
+import { RenderNewAnimalLocationMarker } from './RenderNewAnimalLocationMarker';
+import { PetsInformation } from '@/types/petsTypes';
 
-export function Map({ userLocation, setLoading }: MapProps) {
-  const draggable = useLocationStore(state => state.draggable);
-  const toAddAnimal = useLocationStore(state => state.toAddAnimal);
-  const setToAddAnimal = useLocationStore(state => state.setToAddAnimal);
-  const setLocationNewAnimal = useLocationStore(state => state.setLocationNewAnimal);
-  const setOpenForm = useLocationStore(state => state.setOpenForm);
-  const setDraggable = useLocationStore(state => state.setDraggable);
-  const newLocation = useLocationStore(state => state.newLocation);
-  const pets = usePetsStore(state => state.pets);
-  const fetchPets = usePetsStore(state => state.fetchPets);
-
-  useEffect(() => {
-    fetchPets();
-  }, []);
-
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (toAddAnimal || e.key === 'Escape') setToAddAnimal(false);
-  });
-
-  const handleAddAnimal = (map: MapMouseEvent) => {
-    // Change cursor style to crosshair so user can select location where to add pet on list. 
-    // Then change locationNewAnimal state to the location user selected
-
-    if (!toAddAnimal) return;
-    if (map.detail.latLng) {
-      const { lat, lng } = map.detail.latLng;
-      setLocationNewAnimal(lat, lng);
-      setOpenForm();
-    }
-  };
+export function Map({ userLocation, setLoading, toAddAnimal, pets }: MapProps) {
+  const [draggable, setDraggable] = useState<boolean>(false);
+  const { newLocation, newAnimalLocation, setNewAnimalLocation } = useLocationStore();
 
   const handleDragStart = () => {
     // defaultCenter prop enable the posibility to drag the map but unable the posibility of change the location programatically
     // so we enable it while map is dragring
-    setDraggable();
+    setDraggable(true);
+  };
+
+  const handleClick = (map: MapEvent) => {
+    if (map.detail.latLng) {
+      const { lat, lng } = map.detail.latLng;
+      setNewAnimalLocation(lat, lng);
+    }
   };
 
   const handleDragEnd = ({ map }: MapEvent) => {
@@ -52,7 +33,7 @@ export function Map({ userLocation, setLoading }: MapProps) {
     if (lat && lng)
       newLocation(lat, lng);
 
-    setDraggable();
+    setDraggable(false);
     // at the end of the drag we disable defaultCenter prop. Now center is defined, so we can change center programatically
   };
 
@@ -65,19 +46,21 @@ export function Map({ userLocation, setLoading }: MapProps) {
           defaultCenter={draggable ? userLocation : undefined}
           onDragstart={handleDragStart}
           onDragend={(map) => handleDragEnd(map)}
-          onClick={(map) => handleAddAnimal(map)}
-          onZoomChanged={() => console.log('ZOOM')}
           draggableCursor={toAddAnimal ? 'crosshair' : ''}
+          onClick={toAddAnimal ? (map) => handleClick(map) : undefined}
         >
-
-          {<RenderMarkers pets={pets}></RenderMarkers>}
+          {newAnimalLocation && toAddAnimal && <RenderNewAnimalLocationMarker newAnimalLocation={newAnimalLocation} />}
+          <RenderMarkers pets={pets} ></RenderMarkers>
         </GoogleMap>
       </APIProvider>
-    </div>
+    </div >
   );
 };
 
 interface MapProps {
+  pets: PetsInformation[];
   userLocation: Location,
+  newAnimalLocation?: Location;
+  toAddAnimal?: boolean;
   setLoading: (args: boolean) => void;
 }
