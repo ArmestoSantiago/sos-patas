@@ -27,8 +27,8 @@ export interface PetsInformation {
   imgSrc?: string;
   address: string;
   user_id: string;
-  name: string;
   situation: PetSituation;
+  name: string;
 }
 
 export enum PetsSituation {
