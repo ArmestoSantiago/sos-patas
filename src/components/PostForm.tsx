@@ -1,23 +1,53 @@
 import { useNavigate } from 'react-router';
-import { CamaraIcon, LocationIcon } from './Icons';
+import { CamaraIcon, CrossIcon, LocationIcon } from './Icons';
 import { useLocationStore } from '@/stores/location';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { getAddress } from '@/services/getAddress';
 import { Location } from '@/types/locationTypes';
-
-interface FormData {
-  photo?: File;
-  name: string;
-  caseType: 'adoption' | 'lost' | 'rescue' | 'transit';
-  location: string;
-  description: string;
-}
+import { StatusButtons } from './StatusButtons';
+import { PetsSituation, PetsType } from '@/types/petsTypes.d';
+import { TypeButtons } from './TypeButtons';
 
 export function PostForm({ newAnimalLocation }: AnimalFormProps) {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [situation, setSituation] = useState<PetsSituation>(PetsSituation.ADOPTION);
+  const [selectedType, setSelectedType] = useState<PetsType>(PetsType.DOG);
+  const [description, setDescription] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [previewURL, setPreviewURL] = useState<string | null>(null);
+
   const navigate = useNavigate();
+
   const { setToAddAnimal } = useLocationStore();
   const [addressNewAnimal, setAddressNewAnimal] = useState<string | null>(null);
-  console.log(newAnimalLocation);
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(event.target.value);
+  };
+
+  const handleChangeStatus = (status: PetsSituation) => {
+    setSituation(status);
+  };
+
+  const handleChangeType = (type: PetsType) => {
+    setSelectedType(type);
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setSelectedFile(files[0]);
+    }
+  };
+
+  const handleRemoveImg = () => {
+    setPreviewURL(null);
+    setSelectedFile(null);
+  };
 
   useEffect(() => {
 
@@ -32,6 +62,15 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
 
   }, [newAnimalLocation]);
 
+  useEffect(() => {
+    if (selectedFile) {
+      const url = URL.createObjectURL(selectedFile);
+      setPreviewURL(url);
+
+      return () => URL.revokeObjectURL(url);
+    }
+  }, [selectedFile]);
+
   const handleGetCoords = () => {
     setToAddAnimal(true);
     navigate('/map');
@@ -42,54 +81,47 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
       <div className="pb-20 my-6 mx-4 max-w-160 w-full">
         <form>
           <div className="bg-white rounded-3xl border border-stone-100 p-6">
-            <label className="block text-sm font-semibold text-stone-700 mb-4">Foto del animal *</label>
-            <span>
-              <label className="flex flex-col items-center justify-center h-64 gap-1 border-2 border-dashed border-stone-300 rounded-2xl cursor-pointer hover:border-[#4CAF50] hover:bg-stone-50 transition-all">
-                <CamaraIcon />
-                <div>
-                  <p className='text-stone-600'>Toca para subir una foto</p>
-                  <p className='text-sm text-semibold text-center text-stone-400'>JPG, PNG o WEBP</p>
-                  <input id="image-upload" accept="image/*" data-testid="image-input" className="hidden" type="file"></input>
-                </div>
-              </label>
-            </span>
+            <p className="block text-sm font-semibold text-stone-700 mb-4">Foto del animal *</p>
+            <label className={`flex flex-col items-center relative justify-center h-64 gap-1  ${!selectedFile && 'border-2 border-dashed border-stone-300 rounded-2xl'}   cursor-pointer hover:border-[#4CAF50] hover:bg-stone-50 transition-all`}>
+              {!previewURL ?
+                <>
+                  <CamaraIcon />
+                  <div>
+                    <p className='text-stone-600'>Toca para subir una foto</p>
+                    <p className='text-sm text-semibold text-center text-stone-400'>JPG, PNG o WEBP</p>
+                    <input onChange={handleFileChange} id="image-upload" accept="image/*" data-testid="image-input" className="hidden" type="file"></input>
+                  </div>
+                </> :
+                <>
+                  <button onClick={handleRemoveImg} className='absolute top-3 right-3 z-30 w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer shadow-lg'>
+                    <CrossIcon />
+                  </button>
+                  <img src={previewURL} className='w-full h-full object-cover rounded-2xl' />
+                </>
+              }
+            </label>
           </div>
           <div className='bg-white rounded-3xl border border-stone-100 mt-6 p-6'>
             <div>
               <label className='block text-sm font-semibold text-stone-700 mb-4' >
                 Nombre del animal *
               </label>
-              <input data-testid="name-input" className='w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all py-3 px-4' type="text" placeholder='Ej: Luna, Max, Michi' />
+              <input value={name} onChange={handleNameChange} data-testid="name-input" className='w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all py-3 px-4' type="text" placeholder='Ej: Luna, Max, Michi' />
             </div>
             <div>
               <label className='block text-sm font-semibold text-stone-700 mt-8 mb-4' >
-                Tipo de caso *
+                Tipo de situación *
               </label>
               <div className='grid grid-cols-2 gap-3'>
-                <label className='cursor-pointer'>
-                  <input data-testid="status-adoption" className='sr-only'></input>
-                  <div className='rounded-2xl text-center font-semibold transition-all border-2 bg-[#2E7D32] text-white border-[#2E7D32] p-4'>
-                    <span>En adopción</span>
-                  </div>
+                <StatusButtons handleClick={handleChangeStatus} situation={situation} />
+              </div>
+              <div>
+                <label className='block text-sm font-semibold text-stone-700 mt-8 mb-4' >
+                  Especie *
                 </label>
-                <label className='cursor-pointer'>
-                  <input data-testid="status-lost" className='sr-only'></input>
-                  <div className='rounded-2xl text-stone-600 text-center font-semibold transition-all border-2 bg-stone-50  border-stone-200 hover:border-[#4CAF50] p-4'>
-                    <span>Perdido</span>
-                  </div>
-                </label>
-                <label className='cursor-pointer'>
-                  <input data-testid="status-rescue" className='sr-only'></input>
-                  <div className='rounded-2xl text-stone-600 text-center font-semibold transition-all border-2 bg-stone-50  border-stone-200 hover:border-[#4CAF50] p-4'>
-                    <span>Rescate</span>
-                  </div>
-                </label>
-                <label className='cursor-pointer'>
-                  <input data-testid="status-transition" className='sr-only'></input>
-                  <div className='rounded-2xl text-stone-600 text-center font-semibold transition-all border-2 bg-stone-50  border-stone-200 hover:border-[#4CAF50] p-4' >
-                    <span>En tránsito</span>
-                  </div>
-                </label>
+                <div className='grid grid-cols-1 gap-3'>
+                  <TypeButtons handleClick={handleChangeType} selectedType={selectedType} />
+                </div>
               </div>
               <div>
                 <label className='block text-sm font-semibold text-stone-700 mt-8 mb-4'>Ubicación *</label>
@@ -102,7 +134,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-stone-700 mt-8 mb-4">Descripción</label>
-                <textarea maxLength={120} data-testid="description-input" className="w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all pt-3 px-4 min-h-30" placeholder="Cuentanos sobre este animalito"></textarea>
+                <textarea value={description} onChange={handleDescriptionChange} maxLength={120} data-testid="description-input" className="w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all pt-3 px-4 min-h-30" placeholder="Cuentanos sobre este animalito"></textarea>
               </div>
             </div>
           </div>
