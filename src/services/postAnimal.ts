@@ -42,7 +42,7 @@ export const postAnimal = async ({ data, user, image }: PostAnimalParams) => {
       ...data,
       user_id: user.id,
       address,
-      imgSrc: imageURL
+      imgSrc: imageURL,
     };
 
     const response = await fetch(`${API_URL}/animals`, {
