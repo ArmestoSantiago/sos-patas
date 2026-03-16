@@ -5,7 +5,6 @@ import { NavMenu } from '@/components/NavMenu';
 import { PublicationCard } from '@/components/PublicationCard';
 import { usePetsStore } from '@/stores/pets';
 import { useEffect, useState } from 'react';
-import { Oval } from 'react-loader-spinner';
 
 export function Home() {
   const { fetchPets, pets } = usePetsStore();
@@ -21,16 +20,14 @@ export function Home() {
   const filteredPets = filtered != 'ALL' ? pets.filter(pet => pet.situation === filtered) : pets;
 
   useEffect(() => {
-    setLoading(true);
     fetchPets();
-    setLoading(false);
   }, []);
 
   return (
     <>
       <Header title="SOS Patas" />
       <Filters filtered={filtered} onFilterChange={onFilterChange}></Filters>
-      {loading ? <LoadingComponent /> : <div className='max-w-2xl mx-auto px-4 py-6 pb-20'>
+      {pets.length === 0 ? <LoadingComponent /> : <div className='max-w-2xl mx-auto px-4 py-6 pb-20'>
         <PublicationCard pets={filteredPets} />
       </div>
       }

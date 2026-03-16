@@ -1,10 +1,10 @@
-import { PetsCondition, PetsInformation, PetsSituation } from '@/types/petsTypes.d';
+import { PetsCondition, PetsInformation, PetsSituation, PetsType } from '@/types/petsTypes.d';
 import { DistanceIcon, LocationIcon } from './Icons';
 import { useLocationStore } from '@/stores/location';
 import { useEffect, useMemo, useState } from 'react';
 import { getDistance } from '@/utils/getDistance';
 import { getAllUser } from '@/services/getUsers';
-import { User } from '@/types/usersTypes';
+import { User } from '@/types/usersTypes.d';
 
 export function PublicationCard({ pets }: PublicationCardProps) {
   const { location } = useLocationStore();
@@ -22,7 +22,7 @@ export function PublicationCard({ pets }: PublicationCardProps) {
   return (
     <>
       {pets.map((pet) => {
-
+        const petsTypeEmote = pet.type === PetsType.DOG ? '🐶' : '😺';
         const distance = getDistance(pet.lat, pet.lng, initialUserLocation);
         const distanceText = distance > 999 ? '> 999 km' : `${distance.toFixed(1)} km`;
         const conditionText = getHealInfo(pet.condition);
@@ -46,9 +46,11 @@ export function PublicationCard({ pets }: PublicationCardProps) {
             </div>
             <div className="p-4">
               <div className="flex justify-between items-center mb-2">
-                <h2 className="text-xl font-bold text-[#2A2A2A] line-clamp-1">{
-                  pet.name
-                }</h2>
+                <h2 className="text-xl font-bold text-[#2A2A2A] line-clamp-1">
+                  {petsTypeEmote}
+                  {
+                    pet.name
+                  }</h2>
                 <div className={`flex text-sm rounded-full px-3 py-1 text-white font-semibold items-center gap-1 ${situationText.backGround}`}>
                   <span>{situationText.icon}</span>
                   <p>{situationText.text}</p>

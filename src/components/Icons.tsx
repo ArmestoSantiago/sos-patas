@@ -73,3 +73,9 @@ export const SelectedLocationIcon = () => {
     <svg width="40" height="50" viewBox="0 0 40 50" fill="none" ><path d="M20 0C9 0 0 9 0 20C0 35 20 50 20 50C20 50 40 35 40 20C40 9 31 0 20 0Z" fill="#2E7D32" ></path><circle cx="20" cy="20" r="8" fill="white" ></circle></svg>
   );
 };
+
+export const CrossIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+  );
+};
