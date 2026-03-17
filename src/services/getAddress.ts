@@ -1,4 +1,4 @@
-import { GOOGLE_GEOCODE_APIKEY, GOOGLE_GEOCODE_URL } from '@/config';
+// import { GOOGLE_GEOCODE_APIKEY, GOOGLE_GEOCODE_URL } from '@/config';
 import { Location } from '@/types/locationTypes';
 
 export const getAddress = async ({ lat, lng }: Location) => {
