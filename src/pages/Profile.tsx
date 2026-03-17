@@ -6,7 +6,10 @@ export function Profile() {
   return (
     <>
       <Header title="Profile" />
-      <GoogleLoginButton method={true} />
+      <div className="max-w-160 w-full mx-auto text-center my-6 pb-20 px-4">
+
+        <GoogleLoginButton method={true} />
+      </div>
       <NavMenu />
     </>
   );
