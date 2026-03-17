@@ -89,26 +89,27 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
         condition: selectedCondition
       };
 
-      const posted = await postAnimal(payload);
-      if (posted.code === 429) return setTooManyPublication(true);
-      if (posted.code === 200) {
+      const response = await postAnimal(payload);
+
+      if (response.code === 429) return setTooManyPublication(true);
+      if (response.code === 200) {
         setPosted(true);
+        setLoading(false);
         setTimeout(() => {
           handleResetDefaults();
+          navigate('/');
         }, 2000);
-
         return;
       };
 
     } catch (err) {
       console.log(err);
-    } finally {
-      setLoading(false);
     }
-
   };
 
   useEffect(() => {
+
+    setAddressNewAnimal('Address');
 
     const getAddressText = async () => {
       if (!newAnimalLocation) return;
@@ -140,7 +141,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
   };
 
   const handleResetDefaults = () => {
-    setLoading(false);
+    setTooManyPublication(null);
     setPosted(null);
     setSelectedCondition(PetsCondition.HEALTHY);
     setSelectedFile(null);
@@ -149,14 +150,13 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
     setName('');
     setPreviewURL(null);
     setError(null);
-    setTooManyPublication(null);
     setAddressNewAnimal(null);
     setDescription('');
-    navigate('/');
   };
 
   const handleCancel = () => {
     handleResetDefaults();
+    navigate('/');
   };
 
   const handleNavigateToProfile = () => {
@@ -171,7 +171,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
           <button onClick={handleNavigateToProfile} className='cursor-pointer'><p className='text-decoration-line text-blue-900'>conectarse</p></button>
         </div>
         }
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="bg-white rounded-3xl border border-stone-100 p-6">
             <p className="block text-sm font-semibold text-stone-700 mb-4">Foto del animal *</p>
             <label className={`flex flex-col items-center relative justify-center h-64 gap-1 ${error === 'img' ? 'border-red-600!' : 'border-stone-200'}  ${!selectedFile && 'border-2 border-dashed border-stone-300 rounded-2xl'}   cursor-pointer hover:border-[#4CAF50] hover:bg-stone-50 transition-all`}>
@@ -244,7 +244,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
           '>Complete los campos obligatorios</p>}
           <div className="flex gap-3 mt-6">
             <button type="button" onClick={handleCancel} disabled={loading} data-testid="cancel-button" className="flex-1 cursor-pointer bg-white border-2 border-stone-300 text-stone-600 rounded-full font-semibold hover:bg-stone-50 transition-colors py-3 px-4" >Cancelar</button>
-            <button disabled={loading} type="submit" onClick={handleSubmit} data-testid="submit-button" className="flex-1 cursor-pointer disabled:bg-stone-300 bg-main text-white rounded-full font-semibold relative hover:bg-[#1B5E20] transition-colors shadow-md py-3 px-4">
+            <button disabled={loading || posted === true} type="submit" data-testid="submit-button" className="flex-1 cursor-pointer disabled:bg-stone-300 bg-main text-white rounded-full font-semibold relative hover:bg-[#1B5E20] transition-colors shadow-md py-3 px-4">
               {loading && <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                 <Oval height={24} width={24} color="#000" />
               </div>}

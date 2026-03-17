@@ -40,7 +40,7 @@ export const postAnimal = async (data: PostAnimalParams) => {
     if (!response.ok) {
       if (response.status === 429) throw { code: response.status };
     }
-    return { posted: true };
+    return { posted: true, code: 200 };
 
   } catch (err) {
     const error = err as { code?: number; };
