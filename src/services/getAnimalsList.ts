@@ -1,5 +1,5 @@
 import { API_URL } from '@/config';
-import { PetsCondition, PetsType } from '@/types/petsTypes';
+import { PetsCondition, PetsSituation, PetsType } from '@/types/petsTypes.d';
 
 export const getAnimalsList = async () => {
   // Fetch AnimalList from SOSPatas DB
@@ -28,5 +28,5 @@ interface fetchedPets {
   address: string;
   user_id: string;
   animal_name: string;
-  situation: PetSituation;
+  situation: PetsSituation;
 }
