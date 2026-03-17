@@ -109,8 +109,6 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
 
   useEffect(() => {
 
-    setAddressNewAnimal('Address');
-
     const getAddressText = async () => {
       if (!newAnimalLocation) return;
 
