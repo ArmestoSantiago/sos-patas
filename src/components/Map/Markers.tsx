@@ -16,7 +16,7 @@ const selectBorderColor = (petSituation: PetsSituation) => {
 function Marker({ pet }: { pet: PetsInformation; }) {
   const color = selectBorderColor(pet.situation);
   return (
-    <div className='w-10 h-10 rounded-full border-4 overflow-hidden shadow-lg cursor-pointer transform hover:scale-110 transition-all' style={{ borderColor: color }}>
+    <div className='w-14 h-14 rounded-full border-4 overflow-hidden shadow-lg cursor-pointer transform hover:scale-110 transition-all' style={{ borderColor: color }}>
       <img alt="pet image" src={pet.imgSrc} className='w-full h-full object-cover' />
     </div>
   );
