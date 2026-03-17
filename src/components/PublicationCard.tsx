@@ -21,7 +21,7 @@ export function PublicationCard({ pets }: PublicationCardProps) {
   const initialUserLocation = useMemo(() => location, []);
   return (
     <>
-      {pets.map((pet) => {
+      {pets.reverse().map((pet) => {
         const petsTypeEmote = pet.type === PetsType.DOG ? '🐶' : '😺';
         const distance = getDistance(pet.lat, pet.lng, initialUserLocation);
         const distanceText = distance > 999 ? '> 999 km' : `${distance.toFixed(1)} km`;
