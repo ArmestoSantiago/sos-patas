@@ -15,7 +15,6 @@ export const useLocationStore = create<LocationState>((set, get) => {
     },
     setNewAnimalLocation: (lat: number, lng: number) => {
       if (lat === null || lng === null) return set({ newAnimalLocation: null });
-      console.log(lat, lng);
       set({ newAnimalLocation: { lat, lng } });
     },
     setToAddAnimal: (type) => {
