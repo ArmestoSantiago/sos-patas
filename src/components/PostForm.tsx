@@ -11,6 +11,7 @@ import { validateData } from '@/utils/validateData';
 import { postAnimal } from '@/services/postAnimal';
 import { useUserStore } from '@/stores/users';
 import { ConditionButtons } from './ConditionButtons';
+import { Oval } from 'react-loader-spinner';
 
 export function PostForm({ newAnimalLocation }: AnimalFormProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -21,7 +22,11 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
   const [name, setName] = useState<string>('');
   const [previewURL, setPreviewURL] = useState<string | null>(null);
   const [addressNewAnimal, setAddressNewAnimal] = useState<string | null>(null);
+
+  const [posted, setPosted] = useState<true | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [tooManyPublication, setTooManyPublication] = useState<true | null>(null);
 
   const navigate = useNavigate();
   const { setToAddAnimal } = useLocationStore();
@@ -70,6 +75,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
     }
 
     try {
+      setLoading(true);
       const payload = {
         address: addressNewAnimal || 'Address',
         description,
@@ -84,10 +90,17 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
       };
 
       const posted = await postAnimal(payload);
-      console.log(posted);
+      if (posted.code === 429) return setTooManyPublication(true);
+      if (posted.code === 200) {
+        setPosted(true);
+        handleResetDefaults();
+        return;
+      };
 
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
 
   };
@@ -123,7 +136,8 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
     setSelectedCondition(condition);
   };
 
-  const handleCancel = () => {
+  const handleResetDefaults = () => {
+    setLoading(false);
     setSelectedCondition(PetsCondition.HEALTHY);
     setSelectedFile(null);
     setSituation(PetsSituation.ADOPTION);
@@ -131,9 +145,14 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
     setName('');
     setPreviewURL(null);
     setError(null);
+    setTooManyPublication(null);
     setAddressNewAnimal(null);
     setDescription('');
     navigate('/');
+  };
+
+  const handleCancel = () => {
+    handleResetDefaults();
   };
 
   const handleNavigateToProfile = () => {
@@ -213,12 +232,20 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
               </div>
             </div>
           </div>
+          {tooManyPublication && <p className='text-red-600 text-center mt-4 transition-all
+          
+          '>Demasiadas Publicaciones</p>}
           {error && <p className='text-red-600 text-center mt-4 transition-all
           
           '>Complete los campos obligatorios</p>}
           <div className="flex gap-3 mt-6">
-            <button type="button" onClick={handleCancel} data-testid="cancel-button" className="flex-1 cursor-pointer bg-white border-2 border-stone-300 text-stone-600 rounded-full font-semibold hover:bg-stone-50 transition-colors py-3 px-4" >Cancelar</button>
-            <button disabled={userInfo ? false : true} type="submit" onClick={handleSubmit} data-testid="submit-button" className="flex-1 disabled:bg-stone-300 bg-[#2E7D32] text-white rounded-full font-semibold  hover:bg-[#1B5E20] transition-colors shadow-md py-3 px-4">Publicar</button>
+            <button type="button" onClick={handleCancel} disabled={loading} data-testid="cancel-button" className="flex-1 cursor-pointer bg-white border-2 border-stone-300 text-stone-600 rounded-full font-semibold hover:bg-stone-50 transition-colors py-3 px-4" >Cancelar</button>
+            <button disabled={loading} type="submit" onClick={handleSubmit} data-testid="submit-button" className="flex-1 cursor-pointer disabled:bg-stone-300 bg-main text-white rounded-full font-semibold relative hover:bg-[#1B5E20] transition-colors shadow-md py-3 px-4">
+              {loading && <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                <Oval height={24} width={24} color="#000" />
+              </div>}
+              <p className={`${loading && 'opacity-0'}`}>Publicar</p>
+            </button>
           </div>
         </form >
       </div >

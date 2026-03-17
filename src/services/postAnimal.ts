@@ -11,7 +11,6 @@ export const postAnimal = async (data: PostAnimalParams) => {
     const postedByUser: PetsInformation[] = await getPostedByUser(user.id);
 
     if (postedByUser.length >= 6) {
-      console.log('OH OH');
       throw ({ code: 429, posted: false });
     }
 
@@ -45,6 +44,7 @@ export const postAnimal = async (data: PostAnimalParams) => {
 
   } catch (err) {
     const error = err as { code?: number; };
+    console.log(err);
     return {
       posted: false,
       code: error.code

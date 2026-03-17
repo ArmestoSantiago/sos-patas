@@ -12,7 +12,7 @@ export const uploadImage = async (file: File): Promise<string> => {
   });
 
   if (!response.ok) {
-    throw new Error('Upload Failed');
+    throw { code: response.status };
   }
 
   const data: CloudinaryUploadResponse = await response.json();
