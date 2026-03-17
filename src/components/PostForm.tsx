@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { CamaraIcon, CrossIcon, LocationIcon } from './Icons';
+import { CamaraIcon, CrossIcon, LocationIcon, TickIcon } from './Icons';
 import { useLocationStore } from '@/stores/location';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { getAddress } from '@/services/getAddress';
@@ -93,7 +93,10 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
       if (posted.code === 429) return setTooManyPublication(true);
       if (posted.code === 200) {
         setPosted(true);
-        handleResetDefaults();
+        setTimeout(() => {
+          handleResetDefaults();
+        }, 2000);
+
         return;
       };
 
@@ -138,6 +141,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
 
   const handleResetDefaults = () => {
     setLoading(false);
+    setPosted(null);
     setSelectedCondition(PetsCondition.HEALTHY);
     setSelectedFile(null);
     setSituation(PetsSituation.ADOPTION);
@@ -244,7 +248,10 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
               {loading && <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                 <Oval height={24} width={24} color="#000" />
               </div>}
-              <p className={`${loading && 'opacity-0'}`}>Publicar</p>
+              {posted && <div className='absolute top-1/2 left-1/2 transform flex items-center -translate-x-1/2 -translate-y-1/2'>
+                <TickIcon /> Animal posteado
+              </div>}
+              <p className={`${(posted || loading) && 'opacity-0'}`}>Publicar</p>
             </button>
           </div>
         </form >
