@@ -5,7 +5,7 @@ export const useUserStore = create<UserState>((set) => {
   return {
     userInfo: null,
     userLogged: false,
-    userLogIn: (user: User) => { set({ userInfo: user, userLogged: true }); },
+    setUser: (user: User) => { set({ userInfo: user, userLogged: true }); },
     userLogOut: () => { set({ userInfo: null, userLogged: false }); }
   };
 }); 
