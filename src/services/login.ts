@@ -34,7 +34,7 @@ export const signIn = async () => {
       const user = {
         name: displayName ?? 'Usuario',
         id: uid,
-        photo: photoURL ?? 'public/avatar.png'
+        photoURL: photoURL ?? 'public/avatar.png'
       };
 
       const userExists = await checkUsersExistence(user.id);
@@ -51,8 +51,8 @@ export const signIn = async () => {
     });
 };
 
-const registNewUser = async (data: { name: string, id: string, photo: string; }) => {
-  const { name: displayName, id, photo: photoURL } = data;
+const registNewUser = async (data: { name: string, id: string, photoURL: string; }) => {
+  const { name: displayName, id, photoURL } = data;
 
   const payload = {
     displayName,
