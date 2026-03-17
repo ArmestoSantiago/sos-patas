@@ -6,6 +6,7 @@ import { signOutFn } from '@/services/login';
 export function UserProfile({ posts }: UserProfileProps) {
   const { userInfo } = useUserStore();
   const { userLogOut } = useUserStore();
+  const numberOfPost = posts.length;
 
   const handleLogOut = () => {
     signOutFn();
@@ -28,7 +29,7 @@ export function UserProfile({ posts }: UserProfileProps) {
         </div>
         <div className='grid grid-cols-3 pt-4 border-t border-stone-200'>
           <div className='text-center'>
-            <div className='text-2xl font-bold text-main'>6</div>
+            <div className='text-2xl font-bold text-main'>{numberOfPost}</div>
             <div className='text-xs font-semibold text-stone-500'>Publicaciones</div>
           </div>
           <div className='text-center'>
