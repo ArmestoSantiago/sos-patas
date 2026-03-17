@@ -27,6 +27,15 @@ export interface PetsInformation {
   imgSrc?: string;
   address: string;
   user_id: string;
+  situation: PetSituation;
+  name: string;
+}
+
+export enum PetsSituation {
+  LOST = 'LOST',
+  RESCUE = 'RESCUE',
+  TRANSITION = 'TRANSITION',
+  ADOPTION = 'ADOPTION'
 }
 
 export enum PetsType {
@@ -37,7 +46,7 @@ export enum PetsType {
 export enum PetsCondition {
   HEALTHY = 'HEALTHY',
   WOUNDED = 'WOUNDED',
-  CRTICIAL = 'CRTICIAL'
+  CRITICAL = 'CRITICAL'
 }
 
 interface FormInformation {

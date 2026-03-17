@@ -1,19 +1,23 @@
 import { CLOUDINARY_NAME, CLOUDINARY_APIKEY } from '@/config';
 
-export const uploadImage = async (file: Blob) => {
+export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', 'SOSPatas');
   formData.append('api_key', CLOUDINARY_APIKEY);
+
   const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`, {
     method: 'POST',
     body: formData,
   });
 
+  if (!response.ok) {
+    throw new Error('Upload Failed');
+  }
+
   const data: CloudinaryUploadResponse = await response.json();
 
   return data.secure_url;
-
 };
 
 interface CloudinaryUploadResponse {
@@ -38,4 +42,4 @@ interface CloudinaryUploadResponse {
   display_name: string;
   original_filename: string;
   existing?: boolean;
-}
+};

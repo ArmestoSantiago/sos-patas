@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" /> 
 import path from 'node:path';
+import tailwindcss from '@tailwindcss/vite';
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
@@ -8,7 +9,7 @@ export default defineConfig({
   preview: {
     port: 5173
   },
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   test: {
     environment: 'happy-dom',
     setupFiles: ['./tests/App.test.tsx']

@@ -1,55 +1,29 @@
-import { useEffect, useState } from 'react';
-import { useLocationStore } from '@/stores/location.ts';
-
-import { Map } from '@/components/Map/Map';
-import { MenuPanel } from '@/components/MenuPanel/MenuPanel';
-import { LoadingComponent } from '@/components/Loading/LoadingComponent';
-import { FirstTimeInstruction } from '@/components/FirstTimeInstructions/FirstTimeInstructions';
-import { AddAnimalForm } from '@/components/AddAnimalForm/AddAnimalForm';
-import { usePetsStore } from './stores/pets';
-
-import '@/App.css';
-import { useTextsStore } from './stores/texts';
-import { ColorRing } from 'react-loader-spinner';
+import { Route, Routes } from 'react-router';
+import { Home } from '@/pages/Home';
+import { MapPage } from '@/pages/MapPage';
+import { AddForm } from './pages/AddForm';
+import { Chat } from './pages/Chat';
+import { Profile } from './pages/Profile';
+import { useEffect } from 'react';
+import { useLocationStore } from './stores/location';
 
 function App() {
-  const texts = useTextsStore(state => state.texts);
-  const location = useLocationStore(state => state.location);
-  const loadingPets = usePetsStore(state => state.loadingPets);
-  const fetchLocation = useLocationStore(state => state.fetchLocation);
-  const locationNewAnimal = useLocationStore(state => state.locationNewAnimal);
-  const openForm = useLocationStore(state => state.openForm);
-  const [loading, setLoading] = useState<boolean>(true);
-  const firstTimeValue = window.localStorage.getItem('first');
-  const firstTime = firstTimeValue ? JSON.parse(firstTimeValue) : false;
+  const { location, fetchLocation } = useLocationStore();
 
   useEffect(() => {
     fetchLocation();
   }, []);
 
   return (
-    <main className='main-page'>
-      {!firstTime && <FirstTimeInstruction />}
-      {loading && <LoadingComponent />}
-      {/* locationNewAnimal is used to send de coords where animal article will be render */}
-      {/* openForm render de form */}
-      {openForm && locationNewAnimal && <AddAnimalForm lat={locationNewAnimal.lat} lng={locationNewAnimal.lng} />}
-      <Map
-        location={location}
-        setLoading={setLoading}
-      >
-      </Map>
-      {!loading && <MenuPanel />}
-      {loadingPets && !loading && (
-        <div className='loading-window'>
-          <p >{texts.loadingPets}</p>
-          <ColorRing
-            width="60"
-            height="60"
-          />;
-        </div>
-      )}
-    </main>
+    <>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path="/map" element={<MapPage userLocation={location} />}></Route>
+        <Route path="/add" element={<AddForm />}></Route>
+        <Route path="/chats" element={<Chat />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
+      </Routes>
+    </>
   );
 }
 
