@@ -1,25 +1,31 @@
 import { useNavigate } from 'react-router';
 import { CamaraIcon, CrossIcon, LocationIcon } from './Icons';
 import { useLocationStore } from '@/stores/location';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { getAddress } from '@/services/getAddress';
 import { Location } from '@/types/locationTypes';
 import { StatusButtons } from './StatusButtons';
-import { PetsSituation, PetsType } from '@/types/petsTypes.d';
+import { PetsCondition, PetsSituation, PetsType } from '@/types/petsTypes.d';
 import { TypeButtons } from './TypeButtons';
+import { validateData } from '@/utils/validateData';
+import { postAnimal } from '@/services/postAnimal';
+import { useUserStore } from '@/stores/users';
+import { ConditionButtons } from './ConditionButtons';
 
 export function PostForm({ newAnimalLocation }: AnimalFormProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [situation, setSituation] = useState<PetsSituation>(PetsSituation.ADOPTION);
   const [selectedType, setSelectedType] = useState<PetsType>(PetsType.DOG);
+  const [selectedCondition, setSelectedCondition] = useState<PetsCondition>(PetsCondition.HEALTHY);
   const [description, setDescription] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [previewURL, setPreviewURL] = useState<string | null>(null);
+  const [addressNewAnimal, setAddressNewAnimal] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
-
   const { setToAddAnimal } = useLocationStore();
-  const [addressNewAnimal, setAddressNewAnimal] = useState<string | null>(null);
+  const { userInfo } = useUserStore();
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -37,7 +43,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
     setSelectedType(type);
   };
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
@@ -47,6 +53,42 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
   const handleRemoveImg = () => {
     setPreviewURL(null);
     setSelectedFile(null);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!newAnimalLocation || !userInfo || !selectedFile) return;
+
+    setError(null);
+
+    const validatedData = validateData({ description, name, img: selectedFile, newAnimalLocation });
+
+    if (validatedData) {
+      const typeOfError = validatedData;
+      setError(typeOfError);
+      return;
+    }
+
+    try {
+      const payload = {
+        address: addressNewAnimal || 'Address',
+        description,
+        name,
+        type: selectedType,
+        situation,
+        image: selectedFile,
+        userInfo,
+        lat: newAnimalLocation.lat,
+        lng: newAnimalLocation.lng,
+        condition: selectedCondition
+      };
+
+      const posted = postAnimal(payload);
+
+    } catch (err) {
+      console.log(err);
+    }
+
   };
 
   useEffect(() => {
@@ -76,13 +118,39 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
     navigate('/map');
   };
 
+  const handleConditionChange = (condition: PetsCondition) => {
+    setSelectedCondition(condition);
+  };
+
+  const handleCancel = () => {
+    setSelectedCondition(PetsCondition.HEALTHY);
+    setSelectedFile(null);
+    setSituation(PetsSituation.ADOPTION);
+    setSelectedType(PetsType.DOG);
+    setName('');
+    setPreviewURL(null);
+    setError(null);
+    setAddressNewAnimal(null);
+    setDescription('');
+    navigate('/');
+  };
+
+  const handleNavigateToProfile = () => {
+    navigate('/profile');
+  };
+
   return (
     <div className='flex w-full justify-center'>
       <div className="pb-20 my-6 mx-4 max-w-160 w-full">
+        {!userInfo && <div className='flex items-center mb-4 gap-1'>
+          <p>Debes estar logeado para publicar!</p>
+          <button onClick={handleNavigateToProfile} className='cursor-pointer'><p className='text-decoration-line text-blue-900'>conectarse</p></button>
+        </div>
+        }
         <form>
           <div className="bg-white rounded-3xl border border-stone-100 p-6">
             <p className="block text-sm font-semibold text-stone-700 mb-4">Foto del animal *</p>
-            <label className={`flex flex-col items-center relative justify-center h-64 gap-1  ${!selectedFile && 'border-2 border-dashed border-stone-300 rounded-2xl'}   cursor-pointer hover:border-[#4CAF50] hover:bg-stone-50 transition-all`}>
+            <label className={`flex flex-col items-center relative justify-center h-64 gap-1 ${error === 'img' ? 'border-red-600!' : 'border-stone-200'}  ${!selectedFile && 'border-2 border-dashed border-stone-300 rounded-2xl'}   cursor-pointer hover:border-[#4CAF50] hover:bg-stone-50 transition-all`}>
               {!previewURL ?
                 <>
                   <CamaraIcon />
@@ -106,7 +174,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
               <label className='block text-sm font-semibold text-stone-700 mb-4' >
                 Nombre del animal *
               </label>
-              <input value={name} onChange={handleNameChange} data-testid="name-input" className='w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all py-3 px-4' type="text" placeholder='Ej: Luna, Max, Michi' />
+              <input value={name} onChange={handleNameChange} data-testid="name-input" className={`w-full bg-stone-50 border ${error === 'name' ? 'border-red-600' : 'border-stone-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all py-3 px-4`} type="text" placeholder='Ej: Luna, Max, Michi' />
             </div>
             <div>
               <label className='block text-sm font-semibold text-stone-700 mt-8 mb-4' >
@@ -114,6 +182,12 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
               </label>
               <div className='grid grid-cols-2 gap-3'>
                 <StatusButtons handleClick={handleChangeStatus} situation={situation} />
+              </div>
+              <label className='block text-sm font-semibold text-stone-700 mt-8 mb-4' >
+                Condición *
+              </label>
+              <div className='grid grid-cols-2 gap-3'>
+                <ConditionButtons handleClick={handleConditionChange} selectedCondition={selectedCondition} />
               </div>
               <div>
                 <label className='block text-sm font-semibold text-stone-700 mt-8 mb-4' >
@@ -125,7 +199,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
               </div>
               <div>
                 <label className='block text-sm font-semibold text-stone-700 mt-8 mb-4'>Ubicación *</label>
-                <button onClick={handleGetCoords} data-testid="location-button" type="button" className="w-full cursor-pointer text-left rounded-xl border-2 transition-all bg-stone-50 border-stone-200 hover:border-[#4CAF50] text-stone-400 py-3 px-4">
+                <button onClick={handleGetCoords} data-testid="location-button" type="button" className={`w-full cursor-pointer text-left rounded-xl border-2 transition-all bg-stone-50 ${error === 'location' ? 'border-red-600' : 'border-stone-200'} hover:border-[#4CAF50] text-stone-400 py-3 px-4`}>
                   <div className='flex items-center gap-3'>
                     <LocationIcon />
                     <span>{addressNewAnimal ? addressNewAnimal : 'Seleccionar ubicación en el mapa'}</span>
@@ -134,17 +208,20 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-stone-700 mt-8 mb-4">Descripción</label>
-                <textarea value={description} onChange={handleDescriptionChange} maxLength={120} data-testid="description-input" className="w-full bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all pt-3 px-4 min-h-30" placeholder="Cuentanos sobre este animalito"></textarea>
+                <textarea value={description} onChange={handleDescriptionChange} maxLength={120} data-testid="description-input" className={`w-full bg-stone-50 border ${error === 'description' ? 'border-red-600' : 'border-stone-200'}  rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF50] focus:border-transparent transition-all pt-3 px-4 min-h-30`} placeholder="Cuentanos sobre este animalito"></textarea>
               </div>
             </div>
           </div>
+          {error && <p className='text-red-600 text-center mt-4 transition-all
+          
+          '>Complete los campos obligatorios</p>}
           <div className="flex gap-3 mt-6">
-            <button type="button" data-testid="cancel-button" className="flex-1 bg-white border-2 border-stone-300 text-stone-600 rounded-full font-semibold hover:bg-stone-50 transition-colors py-3 px-4" >Cancelar</button>
-            <button type="submit" data-testid="submit-button" className="flex-1 bg-[#2E7D32] text-white rounded-full font-semibold hover:bg-[#1B5E20] transition-colors shadow-md py-3 px-4">Publicar</button>
+            <button type="button" onClick={handleCancel} data-testid="cancel-button" className="flex-1 cursor-pointer bg-white border-2 border-stone-300 text-stone-600 rounded-full font-semibold hover:bg-stone-50 transition-colors py-3 px-4" >Cancelar</button>
+            <button disabled={userInfo ? false : true} type="submit" onClick={handleSubmit} data-testid="submit-button" className="flex-1 disabled:bg-stone-300 bg-[#2E7D32] text-white rounded-full font-semibold  hover:bg-[#1B5E20] transition-colors shadow-md py-3 px-4">Publicar</button>
           </div>
         </form >
       </div >
-    </div>
+    </div >
   );
 }
 
