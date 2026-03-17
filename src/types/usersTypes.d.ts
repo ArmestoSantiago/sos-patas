@@ -7,6 +7,6 @@ export interface User {
 export interface UserState {
   userInfo: User | null,
   userLogged: boolean;
-  userLogIn: (user: User) => void;
+  setUser: (user: User) => void;
   userLogOut: () => void;
 }
