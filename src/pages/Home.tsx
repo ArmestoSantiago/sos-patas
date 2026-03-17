@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 export function Home() {
   const { fetchPets, pets } = usePetsStore();
   const [filtered, setFiltered] = useState<string>('ALL');
-  const [loading, setLoading] = useState<boolean>(false);
 
   const onFilterChange = (filter: string) => {
     if (filter === filtered) return setFiltered('ALL');

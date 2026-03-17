@@ -20,8 +20,9 @@ export function Map({ userLocation, setLoading, toAddAnimal, pets }: MapProps) {
   };
 
   const handleClick = (map: MapEvent) => {
-    if (map.detail.latLng) {
-      const { lat, lng } = map.detail.latLng;
+    const detail = map.detail as { latLng: google.maps.LatLng; };
+    if (detail.latLng) {
+      const { lat, lng } = detail.latLng;
       setNewAnimalLocation(lat, lng);
     }
   };

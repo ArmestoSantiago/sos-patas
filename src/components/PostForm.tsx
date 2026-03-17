@@ -83,7 +83,8 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
         condition: selectedCondition
       };
 
-      const posted = postAnimal(payload);
+      const posted = await postAnimal(payload);
+      console.log(posted);
 
     } catch (err) {
       console.log(err);

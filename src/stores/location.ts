@@ -3,7 +3,7 @@ import { LocationState } from '@/types/locationTypes.d';
 import { getLocation } from '@services/getLocation';
 import { CONST } from '@/const/const';
 
-export const useLocationStore = create<LocationState>((set, get) => {
+export const useLocationStore = create<LocationState>((set) => {
   return {
     location: CONST.defaultLocation,
     initialLocation: {},

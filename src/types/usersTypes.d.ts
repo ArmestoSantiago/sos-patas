@@ -1,7 +1,7 @@
 export interface User {
   id: string;
   name: string;
-  photoURL: string;
+  photo: string;
 }
 
 export interface UserState {

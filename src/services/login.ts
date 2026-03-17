@@ -69,7 +69,7 @@ const registNewUser = async (data: { name: string, id: string, photo: string; })
         'Content-Type': 'application/json'
       }
     });
-    const data2 = await registedUser.json();
+    await registedUser.json();
   } catch (err) {
     console.log(err);
   }
