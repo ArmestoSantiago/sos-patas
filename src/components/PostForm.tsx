@@ -97,7 +97,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
         setLoading(false);
         setTimeout(() => {
           handleResetDefaults();
-          navigate('/');
+          navigate('/map');
         }, 2000);
         return;
       };
