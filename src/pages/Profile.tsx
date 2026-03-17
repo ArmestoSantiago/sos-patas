@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 export function Profile() {
   const { userInfo } = useUserStore();
   const [posts, setPosts] = useState([]);
-  console.log(posts);
 
   useEffect(() => {
     if (!userInfo) return;
@@ -20,7 +19,7 @@ export function Profile() {
     };
 
     getPosts();
-  }, []);
+  }, [userInfo]);
   return (
     <>
       <Header title="Profile" />
