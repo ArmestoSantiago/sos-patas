@@ -13,4 +13,4 @@ export const getAddress = async ({ lat, lng }: Location) => {
       return formateAddress;
     })
     .catch(() => null);
-// };
+};
