@@ -15,13 +15,19 @@ export const usePetsStore = create<PetsStateStore>((set) => {
   };
 });
 
-// Example of Pets:
+// Example of Pet:
 // pets: [
 //   {
 //     id: crypto.randomUUID(),
-//     type: 'dog',
-//     location: { lat: -33.738186564405446, lng: -61.97131547743373 },
-//     condition: 'healty',
+//     type: 'DOG',
+//     lat: -33.737777768541996,
+//     lng: -61.95909062957763,
+//     condition: 'HEALTHY',
 //     description: 'amable',
+//     address: 'Jujuy 220',
+//     name: 'Max',
+//     situation: 'TRANSITION',
+//     imgSrc: 'https://res.cloudinary.com/dfj9eimlv/image/upload/v1744156350/blob_o7l6wd.jpg',
+//     user_id: id
 //   },
 // ],
