@@ -1,18 +1,16 @@
-// import { GOOGLE_GEOCODE_APIKEY, GOOGLE_GEOCODE_URL } from '@/config';
+import { GOOGLE_GEOCODE_APIKEY, GOOGLE_GEOCODE_URL } from '@/config';
 import { Location } from '@/types/locationTypes';
 
 export const getAddress = async ({ lat, lng }: Location) => {
   // Transfor from coords to address name
-  console.log(lat, lng);
 
-  return '25 de Mayo 912';
-  // const GEOCODE_URL = `${GOOGLE_GEOCODE_URL}/json?latlng=${lat},${lng}&key=${GOOGLE_GEOCODE_APIKEY}`;
-  // return fetch(GEOCODE_URL)
-  //   .then(res => res.json())
-  //   .then(addressInfo => {
-  //     console.log(addressInfo);
-  //     const formateAddress = addressInfo.results[0].formatted_address.split(',')[0];
-  //     return formateAddress;
-  //   })
-  //   .catch(() => null);
-};
+  const GEOCODE_URL = `${GOOGLE_GEOCODE_URL}/json?latlng=${lat},${lng}&key=${GOOGLE_GEOCODE_APIKEY}`;
+  return fetch(GEOCODE_URL)
+    .then(res => res.json())
+    .then(addressInfo => {
+      console.log(addressInfo);
+      const formateAddress = addressInfo.results[0].formatted_address.split(',')[0];
+      return formateAddress;
+    })
+    .catch(() => null);
+// };
