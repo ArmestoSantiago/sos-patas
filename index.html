@@ -31,14 +31,16 @@
     script-src 'self' https://maps.googleapis.com https://maps.gstatic.com https://apis.google.com;
     connect-src 'self'
     https://maps.googleapis.com
-    http://localhost:51204/animals
+    http://localhost:51204/
     https://api.cloudinary.com/v1_1/dfj9eimlv/image/upload
     https://maps.gstatic.com
     https://sospatasapirest.onrender.com
     https://sospatas-apirest.up.railway.app
     https://identitytoolkit.googleapis.com;
     img-src 'self' data: https: blob:;
-    style-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
     frame-src https://accounts.google.com https://sospatas.firebaseapp.com;
     "
   />
