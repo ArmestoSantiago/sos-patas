@@ -1,6 +1,6 @@
 import { API_URL } from '@/config';
 
-export const getLocationPrediction = async (input: string) => {
+export const getLocationPrediction: (input: string) => Promise<GooglePlacePrediction[]> | false = async (input: string) => {
   // Fetch posibles locations name based on user input
 
   const fullURL = `${API_URL}/predictions?input=${input}`;
@@ -15,3 +15,29 @@ export const getLocationPrediction = async (input: string) => {
   }
 
 };
+
+export interface GooglePlacePrediction {
+  description: string;
+  matched_substrings: GoogleMatchedSubstring[];
+  place_id: string;
+  reference: string;
+  structured_formatting: GoogleStructuredFormatting;
+  terms: GoogleTerm[];
+  types: string[];
+}
+
+export interface GoogleMatchedSubstring {
+  length: number;
+  offset: number;
+}
+
+export interface GoogleStructuredFormatting {
+  main_text: string;
+  main_text_matched_substrings: GoogleMatchedSubstring[];
+  secondary_text?: string;
+}
+
+export interface GoogleTerm {
+  offset: number;
+  value: string;
+}
