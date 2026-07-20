@@ -5,13 +5,14 @@ import { CONST } from '@/const/const';
 
 export const useLocationStore = create<LocationState>((set) => {
   return {
+    userDefaultLocation: undefined,
     location: CONST.defaultLocation,
-    initialLocation: {},
     toAddAnimal: false,
     newAnimalLocation: null,
     fetchLocation: async () => {
       const location = await getLocation().then((location) => location);
       set({ location });
+      set({ userDefaultLocation: location });
     },
     setNewAnimalLocation: (lat: number, lng: number) => {
       if (lat === null || lng === null) return set({ newAnimalLocation: null });
