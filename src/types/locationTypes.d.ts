@@ -1,6 +1,7 @@
 //                                           Location Types
 export interface LocationState extends MapType {
   toAddAnimal: boolean | undefined;
+  userDefaultLocation: Location | undefined;
   newAnimalLocation: Location | null;
   setNewAnimalLocation: (lat?, lng?) => void;
   setToAddAnimal: (type: boolean) => void;
