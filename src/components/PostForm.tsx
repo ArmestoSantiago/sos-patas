@@ -23,6 +23,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
   const [previewURL, setPreviewURL] = useState<string | null>(null);
   const [addressNewAnimal, setAddressNewAnimal] = useState<string | null>(null);
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [posted, setPosted] = useState<true | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,6 +65,8 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
     e.preventDefault();
     if (!newAnimalLocation || !userInfo || !selectedFile) return;
 
+    setTooManyPublication(null);
+    setSubmitError(null);
     setError(null);
 
     const validatedData = validateData({ description, name, img: selectedFile, newAnimalLocation });
@@ -91,19 +94,24 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
 
       const response = await postAnimal(payload);
 
-      if (response.code === 429) return setTooManyPublication(true);
-      if (response.code === 200) {
-        setPosted(true);
-        setLoading(false);
-        setTimeout(() => {
-          handleResetDefaults();
-          navigate('/map');
-        }, 2000);
+      if (!response.posted) {
+        if (response.code === 429) {
+          setTooManyPublication(true);
+        } else {
+          setSubmitError('Error al publicar el animal');
+        }
         return;
-      };
+      }
+      setPosted(true);
+      setTimeout(() => {
+        handleResetDefaults();
+        navigate('/map');
+      }, 2000);
 
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -240,6 +248,11 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
           {error && <p className='text-red-600 text-center mt-4 transition-all
           
           '>Complete los campos obligatorios</p>}
+          {submitError && (
+            <p role="alert" className="text-red-600 text-center mt-4">
+              {submitError}
+            </p>
+          )}
           <div className="flex gap-3 mt-6">
             <button type="button" onClick={handleCancel} disabled={loading} data-testid="cancel-button" className="flex-1 cursor-pointer bg-white border-2 border-stone-300 text-stone-600 rounded-full font-semibold hover:bg-stone-50 transition-colors py-3 px-4" >Cancelar</button>
             <button disabled={loading || posted === true} type="submit" data-testid="submit-button" className="flex-1 cursor-pointer disabled:bg-stone-300 bg-main text-white rounded-full font-semibold relative hover:bg-[#1B5E20] transition-colors shadow-md py-3 px-4">
@@ -256,7 +269,7 @@ export function PostForm({ newAnimalLocation }: AnimalFormProps) {
       </div >
     </div >
   );
-}
+};
 
 interface AnimalFormProps {
   newAnimalLocation?: Location;
