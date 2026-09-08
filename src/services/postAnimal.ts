@@ -38,7 +38,7 @@ export const postAnimal = async (data: PostAnimalParams) => {
     });
 
     if (!response.ok) {
-      if (response.status === 429) throw { code: response.status };
+      throw { code: response.status };
     }
     return { posted: true, code: 200 };
 
